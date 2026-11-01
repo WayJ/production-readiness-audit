@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Show rubric indicator names in report titles: pending-verification cards and the check table now read "A1 · 核心业务链真实完成" instead of repeating the bare id "A1 · A1".
+
 ## 0.2.0 — 2026-11-01
 
 - Replace criterion point allocations with fixed dimension weights and finding-based deductions (3/10/20/40 by default).

@@ -251,6 +251,16 @@ class AuditTests(unittest.TestCase):
         html=m.render(self.d);script=re.findall(r'<script>(.*?)</script>',html,re.S)[0]
         encoded=base64.b64encode(hashlib.sha256(script.encode()).digest()).decode()
         self.assertIn("'sha256-"+encoded+"'",html)
+    def test_indicator_titles_use_rubric_names_not_repeated_ids(self):
+        """待验证卡片与检查表格的指标标题必须是量表名称，不能重复编号。"""
+        html=m.render(self.d)
+        script=re.findall(r'<script>(.*?)</script>',html,re.S)[0]
+        self.assertNotIn("esc(check.id)+' · '+esc(check.criterion)",script)
+        self.assertIn("esc(check.id)+' · '+esc(check.requirement)",script)
+        rubric={c['id']:c['title'] for d in self.r['dimensions'] for c in d['criteria']}
+        for check in self.d['checks']:
+            self.assertEqual(check['criterion'],check['id'])
+            self.assertIn(rubric[check['id']],json.dumps(m.calculate(self.d)['checks'],ensure_ascii=False))
     def test_input_not_mutated(self):
         before=copy.deepcopy(self.d);m.calculate(self.d);self.assertEqual(self.d,before)
     def test_scored_output_roundtrips(self):self.assertEqual(m.calculate(m.calculate(self.d))['summary']['score'],59)
