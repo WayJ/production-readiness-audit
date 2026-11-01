@@ -1,0 +1,863 @@
+{
+  "rubric_version": "3.0",
+  "baseline_ready": true,
+  "meta": {
+    "title": "软件工程质量与上线审查报告",
+    "project": "客户业务协同系统 · 模板示例",
+    "version": "v0.2.0 / synthetic",
+    "reviewed_at": "2026-11-01 · Asia/Shanghai（示例日期）",
+    "snapshot": "DEMO-REVIEW-001（虚构快照）",
+    "environment": "隔离验证环境（虚构示例）",
+    "is_demo": true,
+    "template_version": "3.0"
+  },
+  "conclusion": "虚构演示，不代表真实项目审查。四个独立问题分别在安全、架构、代码组织、数据并发维度扣20、10、10、20分；折合总分扣9分，基础分91。两项确认技术阻断使最终分封顶59。",
+  "baseline": {
+    "scope": [
+      "F-001｜合同查询、额度分配、报价与导出（全部为虚构示例）",
+      "冻结现有功能，检查代码与运行技术能力，不扩展产品范围",
+      "不评价负责人、审批、签字或交接文档形式"
+    ],
+    "conditions": [
+      {
+        "label": "C-001｜目标条件",
+        "value": "企业内部业务系统；本文件中的规模与条件均为演示设定",
+        "status": "示例设定",
+        "id": "C-001",
+        "source": "虚构演示设定；非客户要求"
+      },
+      {
+        "label": "身份与访问",
+        "value": "普通用户与管理用户存在不同资源访问范围",
+        "status": "示例设定",
+        "id": "C-002",
+        "source": "虚构演示设定；非客户要求"
+      },
+      {
+        "label": "数据与并发",
+        "value": "包含共享额度写入，多个请求可能并发到达",
+        "status": "示例设定",
+        "id": "C-003",
+        "source": "虚构演示设定；非客户要求"
+      },
+      {
+        "label": "功能约束",
+        "value": "额度不得超分配；合同详情按资源权限访问",
+        "status": "示例设定",
+        "id": "C-004",
+        "source": "虚构演示设定；非客户要求"
+      },
+      {
+        "label": "检查范围",
+        "value": "9个维度、27项技术要求；示例全部给出判断",
+        "status": "仅用于演示",
+        "id": "C-005",
+        "source": "虚构演示设定；非客户要求"
+      },
+      {
+        "label": "恢复要求",
+        "value": "按示例技术条件验证恢复；不据此推定真实客户要求",
+        "status": "示例设定",
+        "id": "C-006",
+        "source": "虚构演示设定；非客户要求"
+      }
+    ],
+    "key_flows": [
+      {
+        "id": "F-001",
+        "name": "合同详情查询",
+        "expected": "授权身份可读取，无权身份被拒绝",
+        "status": "示例发现权限问题",
+        "evidence_ids": [
+          "E-001"
+        ]
+      },
+      {
+        "id": "F-002",
+        "name": "共享额度分配",
+        "expected": "并发请求不超过可分配额度",
+        "status": "示例发现并发问题",
+        "evidence_ids": [
+          "E-002"
+        ]
+      },
+      {
+        "id": "F-003",
+        "name": "报价、合同与导出规则",
+        "expected": "同一折扣语义一致并可集中维护",
+        "status": "示例发现规则重复",
+        "evidence_ids": [
+          "E-003"
+        ]
+      }
+    ],
+    "limitations": [
+      "本报告所有项目、文件位置、问题、测试和得分均为虚构，用于审阅固定模板。",
+      "正式报告必须绑定真实代码快照、运行条件和证据；本文件不能用作任何项目的上线结论。",
+      "示例为完整验证状态；有未知时模板会显示分数区间与待验证权重，不将其当作确认扣分。"
+    ]
+  },
+  "checks": [
+    {
+      "id": "A1",
+      "criterion": "A1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "F-001"
+      ],
+      "evidence_ids": [
+        "E-005"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "A2",
+      "criterion": "A2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "F-001"
+      ],
+      "evidence_ids": [
+        "E-006"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "A3",
+      "criterion": "A3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "F-001"
+      ],
+      "evidence_ids": [
+        "E-007"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "B1",
+      "criterion": "B1",
+      "status": "fail",
+      "reason": "示例接口验证了登录状态，但读取合同详情时没有约束当前用户可访问的资源集合。全局登录中间件无法替代对象级授权。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-001"
+      ],
+      "finding_ids": [
+        "G-001"
+      ]
+    },
+    {
+      "id": "B2",
+      "criterion": "B2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-008"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "B3",
+      "criterion": "B3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-009"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "B4",
+      "criterion": "B4",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-010"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "C1",
+      "criterion": "C1",
+      "status": "fail",
+      "reason": "合同领域服务调用开票控制器，开票控制器又依赖合同服务，形成跨层循环。接口上下文参与领域调用，使模块边界与职责不清晰。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-004"
+      ],
+      "finding_ids": [
+        "G-004"
+      ]
+    },
+    {
+      "id": "C2",
+      "criterion": "C2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-011"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "C3",
+      "criterion": "C3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-012"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "D1",
+      "criterion": "D1",
+      "status": "fail",
+      "reason": "报价、合同与导出分别复制了语义相同的折扣计算逻辑。当前样例结果一致，但调整同一规则需要修改三处，缺少统一的规则实现入口。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-003"
+      ],
+      "finding_ids": [
+        "G-003"
+      ]
+    },
+    {
+      "id": "D2",
+      "criterion": "D2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-013"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "D3",
+      "criterion": "D3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。 G-004的依赖问题已在C1计分，本项不重复处罚同一要求。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-014"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "E1",
+      "criterion": "E1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-015"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "E2",
+      "criterion": "E2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-016"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "E3",
+      "criterion": "E3",
+      "status": "fail",
+      "reason": "两个并发请求都读取到剩余额度为1，再分别通过校验并创建分配记录；事务边界未确保“检查并扣减”整体条件成立。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-002"
+      ],
+      "finding_ids": [
+        "G-002"
+      ]
+    },
+    {
+      "id": "E4",
+      "criterion": "E4",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-017"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "F1",
+      "criterion": "F1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-018"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "F2",
+      "criterion": "F2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-019"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "F3",
+      "criterion": "F3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-020"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "G1",
+      "criterion": "G1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-021"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "G2",
+      "criterion": "G2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-022"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "H1",
+      "criterion": "H1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-023"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "H2",
+      "criterion": "H2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-024"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "H3",
+      "criterion": "H3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-025"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "I1",
+      "criterion": "I1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-026"
+      ],
+      "finding_ids": []
+    },
+    {
+      "id": "I2",
+      "criterion": "I2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-027"
+      ],
+      "finding_ids": []
+    }
+  ],
+  "findings": [
+    {
+      "id": "G-001",
+      "title": "合同详情接口缺少对象级权限校验",
+      "type": "vulnerability",
+      "dimension_id": "B",
+      "status": "confirmed",
+      "severity": "high",
+      "blocker": true,
+      "cause": "示例接口验证了登录状态，但读取合同详情时没有约束当前用户可访问的资源集合。全局登录中间件无法替代对象级授权。",
+      "trigger": "示例普通用户请求一个不属于其授权范围的合同编号。",
+      "impact": "可能泄露合同内容、金额和客户资料。该示例属于已确认的关键访问边界失效。",
+      "scope": [
+        "合同详情查询",
+        "普通用户与管理用户之间的数据边界"
+      ],
+      "locations": [
+        "server/api/contracts/detail.ts:42–58（虚构位置）",
+        "server/auth/session.ts:18–39（虚构位置）"
+      ],
+      "evidence_ids": [
+        "E-001"
+      ],
+      "suggestion": "在服务端读取合同前校验当前身份对目标合同的访问权限，将资源范围约束纳入查询或统一授权逻辑；检查同类附件和导出入口。",
+      "acceptance": "用有权与无权两类身份直接请求目标合同：有权请求得到正确数据，无权请求被拒绝且不返回敏感字段；保存请求与返回证据。",
+      "reproduction": [
+        "示例：以普通测试身份登录。",
+        "示例：请求授权范围外的合同ID，观察返回内容。",
+        "示例：追踪登录中间件与数据查询链，确认不存在其他有效授权控制。"
+      ],
+      "priority": "先处理 · 技术阻断",
+      "root_cause_key": "g-001-synthetic",
+      "criterion_ids": [
+        "B1"
+      ],
+      "severity_reason": "示例：依据已描述的业务后果和影响范围判定，不以扫描工具等级直接代替判断。",
+      "blocker_rule_id": "SEC-EXPLOIT",
+      "blocker_reason": "可能泄露合同内容、金额和客户资料。该示例属于已确认的关键访问边界失效。"
+    },
+    {
+      "id": "G-002",
+      "title": "额度分配存在先检查后写入的并发竞争",
+      "type": "bug",
+      "dimension_id": "E",
+      "status": "confirmed",
+      "severity": "high",
+      "blocker": true,
+      "cause": "两个并发请求都读取到剩余额度为1，再分别通过校验并创建分配记录；事务边界未确保“检查并扣减”整体条件成立。",
+      "trigger": "同一资源的两个分配请求在读取后、写入前发生交错。",
+      "impact": "示例中只剩一个名额，却产生两条成功分配记录，业务承诺与最终数据不一致。",
+      "scope": [
+        "额度分配接口",
+        "共享额度记录",
+        "相关分配明细"
+      ],
+      "locations": [
+        "server/services/quota/allocate.ts:66–104（虚构位置）"
+      ],
+      "evidence_ids": [
+        "E-002"
+      ],
+      "suggestion": "依据数据库能力采用带条件的原子扣减、合适的行锁或版本校验，并核对受影响行数；让额度变更与分配记录满足同一业务原子性。",
+      "acceptance": "初始额度为1，让两个独立请求按可控交错并发执行；只允许一条成功分配，另一条得到明确失败结果，剩余额度和记录一致。",
+      "reproduction": [
+        "示例：建立剩余额度为1的合成资源。",
+        "示例：让请求A和B都在读取完成后暂停，再同时继续。",
+        "示例：核对成功响应数、分配记录数和剩余额度。"
+      ],
+      "priority": "先处理 · 技术阻断",
+      "root_cause_key": "g-002-synthetic",
+      "criterion_ids": [
+        "E3"
+      ],
+      "severity_reason": "示例：依据已描述的业务后果和影响范围判定，不以扫描工具等级直接代替判断。",
+      "blocker_rule_id": "DATA-CORRUPTION",
+      "blocker_reason": "示例中只剩一个名额，却产生两条成功分配记录，业务承诺与最终数据不一致。"
+    },
+    {
+      "id": "G-003",
+      "title": "同一折扣规则被复制到三处实现",
+      "type": "organization",
+      "dimension_id": "D",
+      "status": "confirmed",
+      "severity": "medium",
+      "blocker": false,
+      "cause": "报价、合同与导出分别复制了语义相同的折扣计算逻辑。当前样例结果一致，但调整同一规则需要修改三处，缺少统一的规则实现入口。",
+      "trigger": "折扣档位、精度或边界规则变化时，需要同步修改多个位置。",
+      "impact": "增加漏改和规则分叉风险；这是已确认的结构问题，不代表本示例已经发生金额计算错误。",
+      "scope": [
+        "报价金额计算",
+        "合同金额计算",
+        "导出金额生成"
+      ],
+      "locations": [
+        "web/quote/calculate.ts:12–47（虚构位置）",
+        "server/contracts/pricing.ts:31–66（虚构位置）",
+        "server/exports/pricing.ts:18–53（虚构位置）"
+      ],
+      "evidence_ids": [
+        "E-003"
+      ],
+      "suggestion": "抽取语义一致且无界面状态的折扣规则函数，将各入口接到同一实现；保留各场景特有规则，避免用大量开关堆成过度通用组件。",
+      "acceptance": "变更一个折扣边界时只修改一个规则实现；报价、合同与导出对同一输入给出一致金额，并覆盖边界与舍入用例。",
+      "reproduction": [
+        "示例：对照三处输入、条件与舍入逻辑，确认业务语义一致。",
+        "示例：列出同一规则变更需要同步修改的三个位置。"
+      ],
+      "priority": "后续处理 · 代码组织",
+      "root_cause_key": "g-003-synthetic",
+      "criterion_ids": [
+        "D1"
+      ],
+      "severity_reason": "示例：依据已描述的业务后果和影响范围判定，不以扫描工具等级直接代替判断。",
+      "blocker_rule_id": null,
+      "blocker_reason": ""
+    },
+    {
+      "id": "G-004",
+      "title": "领域模块反向依赖接口控制器并形成循环",
+      "type": "architecture",
+      "dimension_id": "C",
+      "status": "confirmed",
+      "severity": "medium",
+      "blocker": false,
+      "cause": "合同领域服务调用开票控制器，开票控制器又依赖合同服务，形成跨层循环。接口上下文参与领域调用，使模块边界与职责不清晰。",
+      "trigger": "调整合同或开票接口适配逻辑时，会牵动本应独立的领域逻辑与初始化依赖。",
+      "impact": "扩大修改影响范围和联动验证范围；当前示例未据此断言核心业务无法运行。",
+      "scope": [
+        "合同领域模块",
+        "开票接口适配层",
+        "依赖初始化链"
+      ],
+      "locations": [
+        "server/contracts/service.ts:9（虚构位置）",
+        "server/invoices/controller.ts:11（虚构位置）"
+      ],
+      "evidence_ids": [
+        "E-004"
+      ],
+      "suggestion": "把共享业务能力下沉到职责清晰的服务或端口，控制器负责输入输出适配；以实际调用关系解除该循环，不为此默认拆微服务。",
+      "acceptance": "合同领域模块不再导入开票控制器；双方通过明确服务接口调用，原有业务回归通过，并能单独替换接口适配层进行验证。",
+      "reproduction": [
+        "示例：沿import和调用关系绘出合同服务→开票控制器→合同服务的闭环。",
+        "示例：核对控制器上下文在领域调用中的传播位置。"
+      ],
+      "priority": "后续处理 · 架构边界",
+      "root_cause_key": "g-004-synthetic",
+      "criterion_ids": [
+        "C1"
+      ],
+      "severity_reason": "示例：依据已描述的业务后果和影响范围判定，不以扫描工具等级直接代替判断。",
+      "blocker_rule_id": null,
+      "blocker_reason": ""
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E-001",
+      "method": "示例 · 静态控制链审查与隔离接口验证",
+      "location": "DEMO-REVIEW-001 / 合同接口（虚构）",
+      "expected": "无权身份不能读取目标合同。",
+      "observed": "示例设定：无权身份得到合同内容，控制链未发现有效资源授权。",
+      "limitations": "虚构展示数据；未检查用户的真实项目。",
+      "is_demo": true
+    },
+    {
+      "id": "E-002",
+      "method": "示例 · 可控交错的并发验证",
+      "location": "DEMO-REVIEW-001 / 额度分配（虚构）",
+      "expected": "额度1仅产生一条成功分配。",
+      "observed": "示例设定：两个请求都成功，产生两条分配记录。",
+      "limitations": "虚构展示数据；所有请求、路径和结果仅供模板演示。",
+      "is_demo": true
+    },
+    {
+      "id": "E-003",
+      "method": "示例 · 同义规则与修改点对照",
+      "location": "DEMO-REVIEW-001 / 三处折扣规则（虚构）",
+      "expected": "同一折扣规则有一致且可集中维护的实现。",
+      "observed": "示例设定：相同逻辑分散在三处，同一变更需要同步修改三份。",
+      "limitations": "结构问题示例，不推断已发生金额Bug。",
+      "is_demo": true
+    },
+    {
+      "id": "E-004",
+      "method": "示例 · 模块依赖静态追踪",
+      "location": "DEMO-REVIEW-001 / 合同与开票模块（虚构）",
+      "expected": "领域服务与接口适配层职责清晰、依赖可隔离。",
+      "observed": "示例设定：存在反向依赖和跨层循环。",
+      "limitations": "不依据模块名称或技术风格打分；本处证据为虚构示意。",
+      "is_demo": true
+    },
+    {
+      "id": "E-005",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / A1（虚构证据位置）",
+      "expected": "已承诺的核心业务链真实完成，最终业务结果正确。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-006",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / A2（虚构证据位置）",
+      "expected": "计算、业务规则和状态流转符合已有需求。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-007",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / A3（虚构证据位置）",
+      "expected": "输入边界、校验与用户可见结果符合已承诺行为。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-008",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / B2（虚构证据位置）",
+      "expected": "不可信输入在实际可达路径上不会触发适用的注入、危险执行或越界访问。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-009",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / B3（虚构证据位置）",
+      "expected": "密钥和敏感信息在代码、前端、接口、配置和日志中受到适当保护。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-010",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / B4（虚构证据位置）",
+      "expected": "实际依赖与安全配置不存在未处理的适用安全缺陷。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-011",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / C2（虚构证据位置）",
+      "expected": "共享状态、会话和任务状态的归属符合实际生命周期与实例边界。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-012",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / C3（虚构证据位置）",
+      "expected": "设计复杂度与故障边界适合现有功能，未引入可证明的不必要风险。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-013",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / D2（虚构证据位置）",
+      "expected": "组件、公共逻辑与专用逻辑的划分适合实际复用需求。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-014",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / D3（虚构证据位置）",
+      "expected": "关键逻辑能定位、理解并独立验证，修改影响范围可控。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-015",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / E1（虚构证据位置）",
+      "expected": "数据和文件按约定持久保存，读取与重启后的结果正确。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-016",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / E2（虚构证据位置）",
+      "expected": "约束、事务及部分写入失败保持业务数据完整。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-017",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / E4（虚构证据位置）",
+      "expected": "重复请求、重试和乱序回调不会产生禁止的重复副作用或错误状态。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-018",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / F1（虚构证据位置）",
+      "expected": "超时、重试和依赖失败具有适当边界。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-019",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / F2（虚构证据位置）",
+      "expected": "已有后台任务可终止、释放资源，并按约定处理失败与重启。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-020",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / F3（虚构证据位置）",
+      "expected": "异常反馈和故障控制不会掩盖失败或造成不合理扩散。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-021",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / G1（虚构证据位置）",
+      "expected": "关键操作在约定负载和数据规模下达到性能要求。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-022",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / G2（虚构证据位置）",
+      "expected": "内存、连接、队列与外部调用成本保持可控。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-023",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / H1（虚构证据位置）",
+      "expected": "指定源码与依赖可以复现构建。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-024",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / H2（虚构证据位置）",
+      "expected": "配置与目标部署环境能够正确启动该版本。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-025",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / H3（虚构证据位置）",
+      "expected": "升级兼容与发布失败处置在适用场景可执行。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-026",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / I1（虚构证据位置）",
+      "expected": "关键故障能够被技术机制发现并定位。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-027",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / I2（虚构证据位置）",
+      "expected": "备份恢复或等效重建达到约定的数据可用性要求。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    }
+  ],
+  "schema_version": "2.0",
+  "policy_version": "1.0"
+}

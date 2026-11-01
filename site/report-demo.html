@@ -1,0 +1,1720 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-3bUOqxu5h+ZacY7IHE5zzZeEAJ1ul3S00C45Hr1cvPU='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>软件工程质量审查报告</title>
+<style>
+:root{--paper:#f7f8f5;--white:#fff;--ink:#182c3b;--muted:#687782;--line:#dfe6e8;--navy:#142e40;--navy2:#24485d;--teal:#087f80;--teal-light:#e5f4f0;--red:#be4647;--red-light:#fbeeed;--amber:#a56b19;--amber-light:#fbf2df;--blue-light:#eef3f8;--shadow:0 8px 32px rgba(25,48,63,.045);--radius:15px;--font:Inter,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;--mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:130px}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.7 var(--font);-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #57b8bc;outline-offset:3px}input:focus,select:focus{outline:2px solid #73bdc0;outline-offset:1px}a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}p{margin:0 0 12px}p:last-child{margin-bottom:0}h1,h2,h3,h4{margin:0;line-height:1.4}h1{font-size:32px;letter-spacing:-.8px;font-weight:750}h2{font-size:21px;letter-spacing:-.35px}h3{font-size:16px}h4{font-size:13px}ul,ol{margin:8px 0 0;padding-left:21px}li+li{margin-top:4px}code{font-family:var(--mono);font-size:12px;overflow-wrap:anywhere}small{font-size:12px}.muted{color:var(--muted)}.mono{font-family:var(--mono)}.num{font-variant-numeric:tabular-nums}.wrap{width:min(1200px,calc(100% - 64px));margin:auto}.topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}.top-main{display:flex;align-items:center;justify-content:space-between;gap:20px;height:65px}.brand{display:flex;align-items:center;gap:11px;color:var(--navy);font-size:14px;font-weight:750;letter-spacing:.4px}.brand-icon{display:flex;align-items:flex-end;gap:3px;width:27px;height:26px}.brand-icon i{display:block;width:6px;background:var(--teal);border-radius:2px}.brand-icon i:nth-child(1){height:12px;opacity:.4}.brand-icon i:nth-child(2){height:19px;opacity:.65}.brand-icon i:nth-child(3){height:26px}.brand small{display:block;font-size:10px;letter-spacing:1.7px;font-weight:600;color:var(--muted);line-height:1.4}.top-actions{display:flex;gap:10px;align-items:center}.top-version{color:var(--muted);font-size:11px}.btn{border:1px solid var(--line);background:var(--white);color:var(--ink);padding:7px 13px;border-radius:8px;line-height:1.45;font-size:12px;font-weight:600;white-space:nowrap}.btn:hover{background:#edf4f4;border-color:#b9d4d5}.btn.primary{background:var(--navy);border-color:var(--navy);color:white}.btn.primary:hover{background:var(--navy2)}.nav{display:flex;align-items:center;gap:27px;overflow:auto;scrollbar-width:none;height:43px}.nav::-webkit-scrollbar{display:none}.nav a{color:#596f7a;font-size:12px;white-space:nowrap;line-height:42px}.nav a:hover{color:var(--teal);text-decoration:none}.nav a:first-child{color:var(--teal);font-weight:700}.main{padding:32px 0 40px}.demo-banner{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;background:var(--amber-light);border:1px solid #ebd9ae;border-radius:10px;color:#795b27;margin-bottom:26px;font-size:12px}.demo-banner strong{font-size:13px}.demo-dot{margin-top:7px;width:7px;height:7px;border-radius:50%;background:#b4832c;flex:0 0 auto}.report-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin:0 0 25px}.eyebrow{font-size:10px;font-weight:750;letter-spacing:2.3px;color:var(--teal);margin-bottom:9px}.project-line{font-size:14px;color:var(--muted);margin-top:10px;display:flex;flex-wrap:wrap;gap:5px 14px}.head-meta{flex:0 1 340px;min-width:200px;padding:12px 16px;border-left:2px solid #bfd3d6;font-size:11px;color:var(--muted)}.head-meta div{display:flex;align-items:flex-start;gap:12px}.head-meta div+div{margin-top:5px}.head-meta span:first-child{min-width:44px}.head-meta strong{font-weight:500;color:#3c5563;overflow-wrap:anywhere;word-break:break-word}.overview-grid{display:grid;grid-template-columns:minmax(300px,1.1fr) minmax(0,1.6fr);gap:18px}.score-card{position:relative;overflow:hidden;min-height:272px;border-radius:var(--radius);padding:26px 29px;background:linear-gradient(125deg,#18374b,#102b3b);color:white;box-shadow:var(--shadow)}.score-card:after{content:"";position:absolute;right:-75px;top:-80px;width:250px;height:250px;border:36px solid rgba(98,170,178,.055);border-radius:50%;pointer-events:none}.card-kicker{font-size:12px;letter-spacing:.7px;color:#b8cdd7;display:flex;align-items:center;justify-content:space-between;gap:12px}.score{display:flex;align-items:baseline;gap:10px;margin-top:17px;position:relative;z-index:1}.score strong{font-size:70px;font-weight:650;line-height:1.15;letter-spacing:-3px;font-variant-numeric:tabular-nums}.score strong.interval{font-size:53px;letter-spacing:-2px}.score strong.no-score{font-size:36px;letter-spacing:-1px;padding:14px 0 8px}.score span{font-size:20px;color:#87a8b9}.grade-line{display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}.grade-chip{display:inline-flex;align-items:center;border-radius:5px;font-size:12px;font-weight:700;padding:3px 10px;background:rgba(255,255,255,.13);color:white}.grade-chip.good{background:#17645e;color:#c8f2dc}.grade-chip.warn{background:#6a542b;color:#ffe7b2}.grade-chip.bad{background:#793c43;color:#ffe0df}.score-note{font-size:11px;line-height:1.65;color:#aec4d0;margin-top:16px;position:relative;z-index:1;max-width:390px}.score-note strong{color:#e3edf1;font-weight:600}.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.metric{padding:21px 22px;background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);min-width:0}.metric-label{color:var(--muted);font-size:11px;display:flex;align-items:center;justify-content:space-between;gap:8px}.metric-value{display:flex;gap:7px;align-items:baseline;margin:8px 0 4px;font-size:31px;line-height:1.15;font-weight:700;letter-spacing:-.8px;font-variant-numeric:tabular-nums}.metric-value small{font-size:12px;font-weight:500;letter-spacing:0;color:var(--muted)}.metric-sub{font-size:11px;color:var(--muted);line-height:1.5}.value-red{color:var(--red)}.value-amber{color:var(--amber)}.value-teal{color:var(--teal)}.conclusion{display:grid;grid-template-columns:100px 1fr;gap:18px;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;background:white;padding:17px 20px;margin-top:18px}.conclusion.blocked{border-left-color:var(--red)}.conclusion h3{font-size:12px;line-height:1.8;color:var(--teal)}.conclusion.blocked h3{color:var(--red)}.conclusion p{font-size:13px;line-height:1.85}.section{margin-top:38px;scroll-margin-top:130px}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:17px}.section-title{display:flex;align-items:baseline;gap:12px}.section-number{font-family:var(--mono);font-size:11px;color:var(--teal);font-weight:600}.section-desc{font-size:12px;color:var(--muted);margin-top:5px}.section-note{font-size:11px;color:var(--muted);text-align:right}.panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}.table-scroll{overflow-x:auto;width:100%}table{width:100%;border-collapse:collapse;text-align:left}th{font-weight:600;font-size:11px;letter-spacing:.2px;color:var(--muted);background:#f6f8f8;padding:12px 16px;border-bottom:1px solid var(--line);white-space:nowrap}td{padding:14px 16px;border-bottom:1px solid #edf0f1;vertical-align:middle;font-size:12px}tr:last-child td{border-bottom:0}.dimensions-table{min-width:830px}.dimensions-table th:nth-child(3){width:24%}.dimension-button{border:0;background:transparent;text-align:left;display:flex;gap:11px;align-items:center;color:var(--ink);padding:0;width:100%;font-size:12px}.dimension-button:hover .dimension-name{color:var(--teal);text-decoration:underline}.dimension-letter{display:inline-flex;align-items:center;justify-content:center;flex:0 0 25px;height:25px;border-radius:6px;background:#edf4f5;color:var(--teal);font-family:var(--mono);font-size:10px;font-weight:700}.dimension-name{font-weight:650}.dimension-button small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.earned{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}.earned small{font-size:11px;font-weight:400;color:var(--muted);margin-left:2px}.stack{display:flex;height:7px;border-radius:20px;overflow:hidden;background:#e8ecee;min-width:145px}.stack span{display:block;height:100%}.stack .pass{background:var(--teal)}.stack .fail{background:#cf6865}.stack .unknown{background:#dbb36b}.stack .na{background:#e3e7e8}.score-cell{font-variant-numeric:tabular-nums;white-space:nowrap}.score-cell.fail{color:var(--red);font-weight:650}.score-cell.pending{color:var(--amber)}.legend{display:flex;flex-wrap:wrap;gap:15px;font-size:10px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:5px}.legend i{width:7px;height:7px;border-radius:2px;background:var(--teal)}.legend .fail{background:#cf6865}.legend .unknown{background:#dbb36b}.legend .na{background:#e3e7e8}.table-foot{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:14px 17px;background:#fbfcfc;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}.sum-line{display:flex;gap:17px;flex-wrap:wrap}.sum-line strong{color:var(--ink);font-variant-numeric:tabular-nums}.tiny-note{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.8}.issue-stats{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;line-height:1.5;padding:3px 7px;border-radius:5px;background:#eef3f5;color:#5b7280;white-space:nowrap;font-weight:600}.badge.red{background:var(--red-light);color:var(--red)}.badge.amber{background:var(--amber-light);color:var(--amber)}.badge.teal{background:var(--teal-light);color:var(--teal)}.badge.navy{background:#edf0f4;color:#344f64}.badge.outline{background:white;border:1px solid var(--line);color:var(--muted)}.filter-panel{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}.filter-grid{display:grid;grid-template-columns:1.8fr 1.25fr .8fr .9fr .9fr;gap:10px}.filter-field{min-width:0}.filter-field label{display:block;font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:600}.filter-field input,.filter-field select{width:100%;min-width:0;border:1px solid #d8e2e6;border-radius:7px;padding:8px 10px;background:#fcfdfd;color:var(--ink);font-size:11px;line-height:1.5;height:36px}.filter-field input::placeholder{color:#95a1a9}.filter-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}.filter-count{font-size:11px;color:var(--muted)}.filter-actions{display:flex;gap:7px}.btn.text{border-color:transparent;background:transparent;padding:3px 6px;font-size:11px;color:#577381}.btn.text:hover{background:#edf4f4}.issue-list{display:flex;flex-direction:column;gap:12px}.issue-card{border:1px solid var(--line);border-left:3px solid #d9a149;background:white;border-radius:10px;overflow:hidden;scroll-margin-top:135px;box-shadow:0 3px 15px rgba(25,48,63,.025)}.issue-card.sev-critical{border-left-color:#a53542}.issue-card.sev-high{border-left-color:#c95d56}.issue-card.sev-medium{border-left-color:#d5a04c}.issue-card.sev-low{border-left-color:#7f9fa6}.issue-card>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;padding:19px 20px}.issue-card>summary::-webkit-details-marker{display:none}.issue-card>summary:hover{background:#fbfcfc}.issue-main{min-width:0}.issue-topline{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:7px}.issue-id{font-family:var(--mono);font-size:10px;letter-spacing:.4px;color:var(--muted);margin-right:3px}.issue-title{font-size:15px;font-weight:700;line-height:1.65;overflow-wrap:anywhere}.issue-dim{color:var(--muted);font-size:11px;font-weight:400;margin-top:4px}.issue-right{display:flex;align-items:center;gap:20px;flex-shrink:0}.issue-points{text-align:right;font-weight:700;font-size:22px;color:var(--red);line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap}.issue-points.pending{color:var(--amber);font-size:18px}.issue-points.none{color:var(--muted);font-size:17px}.issue-points small{display:block;color:var(--muted);font-size:10px;font-weight:400;line-height:1.6;margin-top:5px}.chevron{width:8px;height:8px;display:block;border-bottom:1.5px solid #78909b;border-right:1.5px solid #78909b;transform:rotate(45deg);margin:0 3px 4px 0;transition:transform .15s}.issue-card[open] .chevron{transform:rotate(225deg);margin-top:6px}.issue-content{border-top:1px solid #e9eeef;padding:21px 23px 23px}.issue-fields{display:grid;grid-template-columns:1fr 1fr;gap:21px 28px}.field{min-width:0}.field-label{font-size:10px;font-weight:700;letter-spacing:.6px;color:var(--muted);margin-bottom:7px}.field p,.field li{font-size:12px;line-height:1.85;overflow-wrap:anywhere}.field.full{grid-column:1/-1}.impact-box{padding:13px 15px;background:#f8fafb;border-radius:8px;border:1px solid #e5ecee}.scope-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.scope-tags span{background:white;border:1px solid #dfe7e9;border-radius:4px;padding:2px 7px;font-size:10px;color:#5b727e;overflow-wrap:anywhere}.location-list{display:flex;flex-direction:column;gap:5px}.location-list code{display:block;border:1px solid #e5e9ec;background:#f7f9fa;border-radius:5px;padding:5px 8px;color:#4b6574;font-size:11px;white-space:pre-wrap;word-break:break-word}.evidence-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.evidence-link{font-family:var(--mono);font-size:10px;line-height:1.5;background:#edf5f4;border:1px solid #d4e8e3;border-radius:4px;padding:3px 7px;color:var(--teal)}.recommendation{border-left:2px solid #4d9c96;padding-left:12px}.acceptance{border-left:2px solid #a9b8c1;padding-left:12px}.check-link{font-size:11px;color:#5b727f}.check-charges{display:flex;flex-wrap:wrap;gap:7px}.charge{background:#f8fafb;border:1px solid #e0e8eb;padding:6px 9px;border-radius:5px;color:#617681;font-size:10px;line-height:1.6}.charge strong{color:var(--red);font-size:11px;margin-left:6px}.charge.pending strong{color:var(--amber)}.empty-state{padding:32px;text-align:center;background:#fff;border:1px dashed #cbd9de;border-radius:12px;color:var(--muted);font-size:12px}.empty-state strong{display:block;color:#46616f;margin-bottom:5px;font-size:14px}.unknown-group+.unknown-group{margin-top:22px}.unknown-group-head{display:flex;align-items:center;gap:10px;margin-bottom:11px}.unknown-group-head h3{font-size:13px}.unknown-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.unknown-card{padding:17px 19px;border:1px solid #ebdfc3;background:#fffcf5;border-radius:10px}.unknown-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}.unknown-card h3{font-size:13px}.unknown-card p{font-size:12px;color:#6d6c60;line-height:1.8}.unknown-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:10px;color:#9a7c45;margin-top:10px}.baseline-grid{display:grid;grid-template-columns:.9fr 1.3fr;gap:16px}.inner-panel{padding:21px 22px}.subhead{font-size:13px;font-weight:700;margin-bottom:12px}.scope-list{margin:0;padding-left:18px}.scope-list li{font-size:12px;line-height:1.9}.conditions-table th{width:26%;font-size:11px;background:white;vertical-align:top;white-space:normal}.conditions-table td{font-size:12px}.condition-status{display:block;color:var(--muted);font-size:10px;margin-top:4px}.flow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:15px}.flow-card{padding:17px 18px;border:1px solid var(--line);background:white;border-radius:10px}.flow-name{font-size:13px;font-weight:650;margin:7px 0}.flow-card p{color:var(--muted);font-size:11px;line-height:1.8}.flow-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.limitation-box{margin-top:15px;padding:16px 20px;border-radius:10px;background:#edf2f4;border:1px solid #dce5e9;font-size:12px;color:#5b727d}.limitation-box h3{font-size:12px}.limitation-box ul{margin-top:7px}.checks-wrap{margin-top:18px}.checks-wrap>summary{cursor:pointer;padding:16px 19px;font-size:12px;font-weight:650;color:#3c5c6a}.checks-table{min-width:950px}.checks-table th,.checks-table td{padding:10px 13px}.checks-table td{font-size:11px;vertical-align:top}.checks-table .reason{min-width:230px;max-width:430px;line-height:1.8}.check-weight{white-space:nowrap;font-variant-numeric:tabular-nums}.check-id{font-family:var(--mono);font-size:10px}.checks-table .evidence-links{margin-top:0}.evidence-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.evidence-card{padding:19px 20px;background:white;border:1px solid var(--line);border-radius:11px;scroll-margin-top:130px;min-width:0}.evidence-card:target{outline:2px solid #77b7b1;outline-offset:3px}.evidence-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.evidence-header strong{font-family:var(--mono);font-size:11px;color:var(--teal)}.evidence-header span{font-size:10px;color:var(--muted)}.evidence-location{font:10px/1.8 var(--mono);color:#617481;border-radius:5px;background:#f3f6f7;padding:6px 9px;margin-bottom:12px;overflow-wrap:anywhere;white-space:pre-wrap}.evidence-pair{display:grid;grid-template-columns:48px 1fr;gap:8px;font-size:11px;line-height:1.8;margin-top:7px}.evidence-pair span{color:var(--muted)}.evidence-pair p{margin:0;overflow-wrap:anywhere}.method-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:25px}.formula{font-family:var(--mono);font-size:12px;background:#f3f6f7;border-radius:7px;padding:11px 13px;margin:10px 0;color:#47616f;overflow-wrap:anywhere}.method-grid p,.method-grid li{font-size:11px;color:#61737e;line-height:1.9}.grade-scale{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0}.grade-scale div{padding:10px 11px;border-radius:7px;background:var(--teal-light);color:var(--teal);font-size:11px}.grade-scale div:nth-child(2){background:var(--amber-light);color:var(--amber)}.grade-scale div:nth-child(3){background:var(--red-light);color:var(--red)}.grade-scale strong{display:block;font-size:16px;font-weight:650;line-height:1.4}.report-footer{display:flex;justify-content:space-between;gap:24px;padding:24px 0 6px;margin-top:25px;border-top:1px solid #dce5e7;font-size:10px;color:#819099}.fatal{padding:30px;margin:30px auto;max-width:800px;border:1px solid #edc4c4;background:#fff2f1;border-radius:12px;color:#943b3c}.print-meta{display:none}[hidden]{display:none!important}
+@media(max-width:1000px){.wrap{width:calc(100% - 40px)}.overview-grid{grid-template-columns:.95fr 1.3fr}.score-card{padding:24px}.metric{padding:18px}.metric-value{font-size:28px}.score strong{font-size:64px}.filter-grid{grid-template-columns:1.5fr 1.2fr .8fr}.filter-field:first-child{grid-column:1/2}.report-head{gap:20px}.head-meta{flex-basis:270px}.flow-grid{grid-template-columns:1fr 1fr}.baseline-grid{grid-template-columns:1fr 1.25fr}.table-foot{flex-direction:column;gap:10px}}
+@media(max-width:720px){html{scroll-padding-top:120px}.wrap{width:calc(100% - 32px)}.top-main{height:60px;gap:10px}.brand{font-size:12px;gap:8px}.brand small{font-size:8px;letter-spacing:1.2px}.brand-icon{transform:scale(.85);transform-origin:left center;width:24px}.top-version{display:none}.top-actions .btn{font-size:11px;padding:7px 10px}.nav{gap:22px;height:40px}.nav a{font-size:11px;line-height:39px}.main{padding-top:22px}.demo-banner{font-size:11px;margin-bottom:21px}.demo-banner strong{font-size:12px}.report-head{display:block;margin-bottom:20px}h1{font-size:26px;letter-spacing:-.6px}.eyebrow{font-size:9px;letter-spacing:1.7px}.project-line{font-size:12px;margin-top:8px}.head-meta{margin-top:16px;font-size:10px;padding:9px 12px}.overview-grid{grid-template-columns:1fr;gap:12px}.score-card{min-height:235px;padding:22px 24px}.score{margin-top:13px}.score strong{font-size:65px}.score strong.interval{font-size:52px}.score-note{margin-top:12px}.metric-grid{gap:10px}.metric{padding:16px 17px;min-height:128px;border-radius:12px}.metric-value{font-size:28px;margin-top:7px}.metric-label{font-size:10px}.metric-sub{font-size:10px}.conclusion{display:block;padding:15px 17px;margin-top:13px}.conclusion h3{margin-bottom:7px}.conclusion p{font-size:12px}.section{margin-top:29px;scroll-margin-top:115px}.section-head{gap:10px;align-items:flex-start}.section-title{gap:8px}h2{font-size:19px}.section-number{font-size:10px}.section-desc{font-size:11px}.section-note{max-width:130px;font-size:10px}.dimensions-table{min-width:760px}.dimensions-table th,.dimensions-table td{padding:12px}.legend{gap:10px;font-size:9px}.table-foot{padding:12px}.sum-line{gap:11px;font-size:10px}.issue-stats{gap:5px;justify-content:flex-end}.filter-panel{padding:12px}.filter-grid{grid-template-columns:1fr 1fr;gap:9px}.filter-field:first-child{grid-column:1/-1}.filter-field label{font-size:10px}.filter-field input,.filter-field select{font-size:12px;height:37px}.filter-bottom{align-items:flex-start;gap:7px}.filter-actions{gap:1px;flex-wrap:wrap;justify-content:flex-end}.btn.text{font-size:10px;padding:3px 5px}.filter-count{font-size:10px}.issue-card>summary{padding:15px 14px;gap:10px}.issue-title{font-size:13px}.issue-topline{gap:5px;margin-bottom:6px}.badge{font-size:9px;padding:2px 5px}.issue-right{gap:10px}.issue-points{font-size:20px}.issue-points.pending{font-size:16px}.issue-points small{font-size:9px}.issue-dim{font-size:10px}.issue-content{padding:17px 15px}.issue-fields{grid-template-columns:1fr;gap:18px}.field.full{grid-column:auto}.field p,.field li{font-size:12px}.unknown-grid,.baseline-grid,.evidence-grid,.method-grid{grid-template-columns:1fr}.unknown-card{padding:15px 16px}.inner-panel{padding:18px}.flow-grid{grid-template-columns:1fr;gap:10px}.flow-card{padding:15px 17px}.evidence-card{padding:17px}.report-footer{display:block;font-size:9px;line-height:1.9}.report-footer span{display:block}.grade-scale div{padding:9px}.grade-scale strong{font-size:15px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@page{size:A4;margin:13mm 12mm 15mm}
+@media print{html{scroll-behavior:auto}body{background:white;color:#172d3b;font-size:10px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.topbar,.filter-panel,.no-print,.chevron{display:none!important}.wrap{width:100%;max-width:none}.main{padding:0}.report-head{margin-bottom:16px;gap:20px}h1{font-size:23px}.eyebrow{font-size:8px}.head-meta{font-size:9px;flex-basis:245px}.project-line{font-size:10px}.demo-banner{font-size:9px;padding:8px 11px;margin-bottom:14px}.demo-banner strong{font-size:10px}.score-card{min-height:205px;padding:17px 20px;box-shadow:none}.score strong{font-size:54px}.score strong.interval{font-size:43px}.score strong.no-score{font-size:28px}.score-note{font-size:9px;margin-top:10px}.overview-grid{grid-template-columns:1fr 1.35fr;gap:10px;break-inside:avoid}.metric-grid{gap:8px}.metric{padding:13px 15px;min-height:0;box-shadow:none}.metric-value{font-size:25px;margin:7px 0 3px}.metric-label,.metric-sub{font-size:9px}.conclusion{padding:12px 14px;grid-template-columns:75px 1fr;gap:12px;break-inside:avoid}.conclusion h3{font-size:10px}.conclusion p{font-size:10px}.section{margin-top:24px;scroll-margin-top:0}.section-head{margin-bottom:11px;break-after:avoid}h2{font-size:16px}.section-desc,.section-note{font-size:9px}.section-number{font-size:9px}.panel{box-shadow:none;border-radius:8px}.table-scroll{overflow:visible}.dimensions-table{min-width:0}.dimensions-table th,.dimensions-table td{padding:9px 10px}.dimensions-table th{font-size:8px}.dimension-button{font-size:10px;gap:7px}.dimension-button small{font-size:8px}.dimension-letter{height:21px;flex-basis:21px;font-size:9px}.earned{font-size:15px}.earned small{font-size:9px}.stack{min-width:105px;height:6px}.score-cell{font-size:10px}.table-foot{font-size:9px;padding:9px 12px}.legend{font-size:8px;gap:10px}.tiny-note{font-size:9px}.issue-list{gap:10px}.issue-card{box-shadow:none;break-inside:auto}.issue-card[hidden]{display:block!important}.issue-card>summary{padding:13px 15px;break-inside:avoid;break-after:avoid}.issue-title{font-size:12px}.issue-id,.issue-dim{font-size:9px}.issue-points{font-size:20px}.issue-points small{font-size:8px}.badge{font-size:8px}.issue-content{padding:14px 16px 17px}.issue-fields{gap:15px 22px}.field{break-inside:avoid}.field-label{font-size:8px;margin-bottom:5px}.field p,.field li{font-size:10px;line-height:1.8}.location-list code{font-size:9px}.scope-tags span{font-size:8px}.evidence-link{font-size:8px}.charge{font-size:8px;padding:5px 7px}.charge strong{font-size:9px}.unknown-card{break-inside:avoid;padding:13px 15px}.unknown-card h3{font-size:11px}.unknown-card p{font-size:10px}.unknown-foot{font-size:8px}.baseline-grid{gap:12px}.inner-panel{padding:16px}.subhead{font-size:11px}.scope-list li{font-size:10px}.conditions-table th,.conditions-table td{font-size:10px;padding:10px 12px}.condition-status{font-size:8px}.flow-grid{gap:10px}.flow-card{padding:13px 14px;break-inside:avoid}.flow-name{font-size:11px}.flow-card p{font-size:9px}.limitation-box{font-size:10px;padding:13px 15px;break-inside:avoid}.checks-wrap>summary{font-size:10px;padding:12px 15px}.checks-table{min-width:0;table-layout:fixed}.checks-table th,.checks-table td{padding:8px;font-size:8px;overflow-wrap:anywhere}.checks-table th:nth-child(1){width:10%}.checks-table th:nth-child(2){width:8%}.checks-table th:nth-child(3){width:10%}.checks-table th:nth-child(4){width:15%}.checks-table th:nth-child(5){width:36%}.checks-table th:nth-child(6){width:21%}.checks-table .reason{min-width:0;max-width:none}.check-id{font-size:8px}.check-weight{white-space:normal}.evidence-grid{gap:10px}.evidence-card{padding:14px 15px;break-inside:avoid}.evidence-header strong{font-size:10px}.evidence-header span{font-size:8px}.evidence-location{font-size:8px}.evidence-pair{font-size:9px;grid-template-columns:40px 1fr}.method-grid{gap:20px}.method-grid p,.method-grid li{font-size:9px}.formula{font-size:10px}.grade-scale{gap:7px}.grade-scale div{font-size:9px;padding:8px}.grade-scale strong{font-size:14px}.report-footer{font-size:8px;margin-top:20px;padding-top:14px}.print-meta{display:block;font-size:8px;color:var(--muted);margin-top:8px}.empty-state{font-size:10px;padding:18px}.empty-state strong{font-size:11px}thead{display:table-header-group}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap top-main">
+    <a class="brand" href="#overview" aria-label="返回报告概览"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i></span><span>软件工程审查<small>ENGINEERING REVIEW</small></span></a>
+    <div class="top-actions"><span class="top-version" id="top-version"></span><button class="btn primary" id="print-button" type="button">打印 / 保存 PDF</button></div>
+  </div>
+  <nav class="wrap nav" aria-label="报告目录"><a href="#overview">审查概览</a><a href="#dimensions">维度评分</a><a href="#findings">扣分与问题</a><a href="#unknowns">待验证项</a><a href="#baseline">交付基线</a><a href="#evidence">证据索引</a><a href="#method">评分口径</a></nav>
+</header>
+<main class="wrap main" id="report-root">
+  <noscript><div class="fatal">本报告需要浏览器启用 JavaScript 才能展示本地报告数据。所有内容均已保存在此 HTML 文件中，不需要连接网络。</div></noscript>
+</main>
+<script id="report-data" type="application/json">{
+  "rubric_version": "3.0",
+  "baseline_ready": true,
+  "meta": {
+    "title": "软件工程质量与上线审查报告",
+    "project": "客户业务协同系统 · 模板示例",
+    "version": "v0.2.0 / synthetic",
+    "reviewed_at": "2026-11-01 · Asia/Shanghai（示例日期）",
+    "snapshot": "DEMO-REVIEW-001（虚构快照）",
+    "environment": "隔离验证环境（虚构示例）",
+    "is_demo": true,
+    "template_version": "3.0"
+  },
+  "conclusion": "虚构演示，不代表真实项目审查。四个独立问题分别在安全、架构、代码组织、数据并发维度扣20、10、10、20分；折合总分扣9分，基础分91。两项确认技术阻断使最终分封顶59。",
+  "baseline": {
+    "scope": [
+      "F-001｜合同查询、额度分配、报价与导出（全部为虚构示例）",
+      "冻结现有功能，检查代码与运行技术能力，不扩展产品范围",
+      "不评价负责人、审批、签字或交接文档形式"
+    ],
+    "conditions": [
+      {
+        "label": "C-001｜目标条件",
+        "value": "企业内部业务系统；本文件中的规模与条件均为演示设定",
+        "status": "示例设定",
+        "id": "C-001",
+        "source": "虚构演示设定；非客户要求"
+      },
+      {
+        "label": "身份与访问",
+        "value": "普通用户与管理用户存在不同资源访问范围",
+        "status": "示例设定",
+        "id": "C-002",
+        "source": "虚构演示设定；非客户要求"
+      },
+      {
+        "label": "数据与并发",
+        "value": "包含共享额度写入，多个请求可能并发到达",
+        "status": "示例设定",
+        "id": "C-003",
+        "source": "虚构演示设定；非客户要求"
+      },
+      {
+        "label": "功能约束",
+        "value": "额度不得超分配；合同详情按资源权限访问",
+        "status": "示例设定",
+        "id": "C-004",
+        "source": "虚构演示设定；非客户要求"
+      },
+      {
+        "label": "检查范围",
+        "value": "9个维度、27项技术要求；示例全部给出判断",
+        "status": "仅用于演示",
+        "id": "C-005",
+        "source": "虚构演示设定；非客户要求"
+      },
+      {
+        "label": "恢复要求",
+        "value": "按示例技术条件验证恢复；不据此推定真实客户要求",
+        "status": "示例设定",
+        "id": "C-006",
+        "source": "虚构演示设定；非客户要求"
+      }
+    ],
+    "key_flows": [
+      {
+        "id": "F-001",
+        "name": "合同详情查询",
+        "expected": "授权身份可读取，无权身份被拒绝",
+        "status": "示例发现权限问题",
+        "evidence_ids": [
+          "E-001"
+        ]
+      },
+      {
+        "id": "F-002",
+        "name": "共享额度分配",
+        "expected": "并发请求不超过可分配额度",
+        "status": "示例发现并发问题",
+        "evidence_ids": [
+          "E-002"
+        ]
+      },
+      {
+        "id": "F-003",
+        "name": "报价、合同与导出规则",
+        "expected": "同一折扣语义一致并可集中维护",
+        "status": "示例发现规则重复",
+        "evidence_ids": [
+          "E-003"
+        ]
+      }
+    ],
+    "limitations": [
+      "本报告所有项目、文件位置、问题、测试和得分均为虚构，用于审阅固定模板。",
+      "正式报告必须绑定真实代码快照、运行条件和证据；本文件不能用作任何项目的上线结论。",
+      "示例为完整验证状态；有未知时模板会显示分数区间与待验证权重，不将其当作确认扣分。"
+    ]
+  },
+  "checks": [
+    {
+      "id": "A1",
+      "criterion": "A1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "F-001"
+      ],
+      "evidence_ids": [
+        "E-005"
+      ],
+      "finding_ids": [],
+      "critical": true,
+      "requirement": "核心业务链真实完成"
+    },
+    {
+      "id": "A2",
+      "criterion": "A2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "F-001"
+      ],
+      "evidence_ids": [
+        "E-006"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "业务规则与计算结果正确"
+    },
+    {
+      "id": "A3",
+      "criterion": "A3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "F-001"
+      ],
+      "evidence_ids": [
+        "E-007"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "既有交互与输出正确"
+    },
+    {
+      "id": "B1",
+      "criterion": "B1",
+      "status": "fail",
+      "reason": "示例接口验证了登录状态，但读取合同详情时没有约束当前用户可访问的资源集合。全局登录中间件无法替代对象级授权。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-001"
+      ],
+      "finding_ids": [
+        "G-001"
+      ],
+      "critical": true,
+      "requirement": "身份与对象权限边界有效"
+    },
+    {
+      "id": "B2",
+      "criterion": "B2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-008"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "不可信输入不会触发适用的危险行为"
+    },
+    {
+      "id": "B3",
+      "criterion": "B3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-009"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "秘密与敏感数据受保护"
+    },
+    {
+      "id": "B4",
+      "criterion": "B4",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-010"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "依赖与部署暴露风险得到有效控制"
+    },
+    {
+      "id": "C1",
+      "criterion": "C1",
+      "status": "fail",
+      "reason": "合同领域服务调用开票控制器，开票控制器又依赖合同服务，形成跨层循环。接口上下文参与领域调用，使模块边界与职责不清晰。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-004"
+      ],
+      "finding_ids": [
+        "G-004"
+      ],
+      "critical": false,
+      "requirement": "模块与层次职责有合理边界"
+    },
+    {
+      "id": "C2",
+      "criterion": "C2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-011"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "状态与运行拓扑匹配"
+    },
+    {
+      "id": "C3",
+      "criterion": "C3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-012"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "关键依赖与执行方式适合业务约束"
+    },
+    {
+      "id": "D1",
+      "criterion": "D1",
+      "status": "fail",
+      "reason": "报价、合同与导出分别复制了语义相同的折扣计算逻辑。当前样例结果一致，但调整同一规则需要修改三处，缺少统一的规则实现入口。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-003"
+      ],
+      "finding_ids": [
+        "G-003"
+      ],
+      "critical": false,
+      "requirement": "同一业务语义避免多处复制"
+    },
+    {
+      "id": "D2",
+      "criterion": "D2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-013"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "公共能力和模块接口有合理抽离"
+    },
+    {
+      "id": "D3",
+      "criterion": "D3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。 G-004的依赖问题已在C1计分，本项不重复处罚同一要求。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-014"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "核心逻辑可定位并隔离验证"
+    },
+    {
+      "id": "E1",
+      "criterion": "E1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-015"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "持久化与数据关联正确"
+    },
+    {
+      "id": "E2",
+      "criterion": "E2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-016"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "事务与部分失败保持一致"
+    },
+    {
+      "id": "E3",
+      "criterion": "E3",
+      "status": "fail",
+      "reason": "两个并发请求都读取到剩余额度为1，再分别通过校验并创建分配记录；事务边界未确保“检查并扣减”整体条件成立。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-002"
+      ],
+      "finding_ids": [
+        "G-002"
+      ],
+      "critical": true,
+      "requirement": "并发共享状态遵守业务不变量"
+    },
+    {
+      "id": "E4",
+      "criterion": "E4",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-017"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "重复与乱序不会造成禁止的副作用"
+    },
+    {
+      "id": "F1",
+      "criterion": "F1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-018"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "异常结果与错误状态正确传播"
+    },
+    {
+      "id": "F2",
+      "criterion": "F2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-019"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "超时重试取消有边界"
+    },
+    {
+      "id": "F3",
+      "criterion": "F3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-020"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "后台任务与长时间运行不会失控"
+    },
+    {
+      "id": "G1",
+      "criterion": "G1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-021"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "目标规模下关键操作可接受"
+    },
+    {
+      "id": "G2",
+      "criterion": "G2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-022"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "资源与成本消耗有界"
+    },
+    {
+      "id": "H1",
+      "criterion": "H1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-023"
+      ],
+      "finding_ids": [],
+      "critical": true,
+      "requirement": "指定源码可构建并在目标条件启动"
+    },
+    {
+      "id": "H2",
+      "criterion": "H2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-024"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "升级与历史数据兼容"
+    },
+    {
+      "id": "H3",
+      "criterion": "H3",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-025"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "发布失败有技术处置路径"
+    },
+    {
+      "id": "I1",
+      "criterion": "I1",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-026"
+      ],
+      "finding_ids": [],
+      "critical": false,
+      "requirement": "关键故障能发现与定位"
+    },
+    {
+      "id": "I2",
+      "criterion": "I2",
+      "status": "pass",
+      "reason": "示例设定：在本次示例约定范围内满足该技术要求。此记录只演示报告结构，不代表执行过真实项目检查。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [
+        "E-027"
+      ],
+      "finding_ids": [],
+      "critical": true,
+      "requirement": "重要数据可按条件恢复或可靠重建"
+    }
+  ],
+  "findings": [
+    {
+      "id": "G-001",
+      "title": "合同详情接口缺少对象级权限校验",
+      "type": "vulnerability",
+      "dimension_id": "B",
+      "status": "confirmed",
+      "severity": "high",
+      "blocker": true,
+      "cause": "示例接口验证了登录状态，但读取合同详情时没有约束当前用户可访问的资源集合。全局登录中间件无法替代对象级授权。",
+      "trigger": "示例普通用户请求一个不属于其授权范围的合同编号。",
+      "impact": "可能泄露合同内容、金额和客户资料。该示例属于已确认的关键访问边界失效。",
+      "scope": [
+        "合同详情查询",
+        "普通用户与管理用户之间的数据边界"
+      ],
+      "locations": [
+        "server/api/contracts/detail.ts:42–58（虚构位置）",
+        "server/auth/session.ts:18–39（虚构位置）"
+      ],
+      "evidence_ids": [
+        "E-001"
+      ],
+      "suggestion": "在服务端读取合同前校验当前身份对目标合同的访问权限，将资源范围约束纳入查询或统一授权逻辑；检查同类附件和导出入口。",
+      "acceptance": "用有权与无权两类身份直接请求目标合同：有权请求得到正确数据，无权请求被拒绝且不返回敏感字段；保存请求与返回证据。",
+      "reproduction": [
+        "示例：以普通测试身份登录。",
+        "示例：请求授权范围外的合同ID，观察返回内容。",
+        "示例：追踪登录中间件与数据查询链，确认不存在其他有效授权控制。"
+      ],
+      "priority": "先处理 · 技术阻断",
+      "root_cause_key": "g-001-synthetic",
+      "criterion_ids": [
+        "B1"
+      ],
+      "severity_reason": "示例：依据已描述的业务后果和影响范围判定，不以扫描工具等级直接代替判断。",
+      "blocker_rule_id": "SEC-EXPLOIT",
+      "blocker_reason": "可能泄露合同内容、金额和客户资料。该示例属于已确认的关键访问边界失效。"
+    },
+    {
+      "id": "G-002",
+      "title": "额度分配存在先检查后写入的并发竞争",
+      "type": "bug",
+      "dimension_id": "E",
+      "status": "confirmed",
+      "severity": "high",
+      "blocker": true,
+      "cause": "两个并发请求都读取到剩余额度为1，再分别通过校验并创建分配记录；事务边界未确保“检查并扣减”整体条件成立。",
+      "trigger": "同一资源的两个分配请求在读取后、写入前发生交错。",
+      "impact": "示例中只剩一个名额，却产生两条成功分配记录，业务承诺与最终数据不一致。",
+      "scope": [
+        "额度分配接口",
+        "共享额度记录",
+        "相关分配明细"
+      ],
+      "locations": [
+        "server/services/quota/allocate.ts:66–104（虚构位置）"
+      ],
+      "evidence_ids": [
+        "E-002"
+      ],
+      "suggestion": "依据数据库能力采用带条件的原子扣减、合适的行锁或版本校验，并核对受影响行数；让额度变更与分配记录满足同一业务原子性。",
+      "acceptance": "初始额度为1，让两个独立请求按可控交错并发执行；只允许一条成功分配，另一条得到明确失败结果，剩余额度和记录一致。",
+      "reproduction": [
+        "示例：建立剩余额度为1的合成资源。",
+        "示例：让请求A和B都在读取完成后暂停，再同时继续。",
+        "示例：核对成功响应数、分配记录数和剩余额度。"
+      ],
+      "priority": "先处理 · 技术阻断",
+      "root_cause_key": "g-002-synthetic",
+      "criterion_ids": [
+        "E3"
+      ],
+      "severity_reason": "示例：依据已描述的业务后果和影响范围判定，不以扫描工具等级直接代替判断。",
+      "blocker_rule_id": "DATA-CORRUPTION",
+      "blocker_reason": "示例中只剩一个名额，却产生两条成功分配记录，业务承诺与最终数据不一致。"
+    },
+    {
+      "id": "G-003",
+      "title": "同一折扣规则被复制到三处实现",
+      "type": "organization",
+      "dimension_id": "D",
+      "status": "confirmed",
+      "severity": "medium",
+      "blocker": false,
+      "cause": "报价、合同与导出分别复制了语义相同的折扣计算逻辑。当前样例结果一致，但调整同一规则需要修改三处，缺少统一的规则实现入口。",
+      "trigger": "折扣档位、精度或边界规则变化时，需要同步修改多个位置。",
+      "impact": "增加漏改和规则分叉风险；这是已确认的结构问题，不代表本示例已经发生金额计算错误。",
+      "scope": [
+        "报价金额计算",
+        "合同金额计算",
+        "导出金额生成"
+      ],
+      "locations": [
+        "web/quote/calculate.ts:12–47（虚构位置）",
+        "server/contracts/pricing.ts:31–66（虚构位置）",
+        "server/exports/pricing.ts:18–53（虚构位置）"
+      ],
+      "evidence_ids": [
+        "E-003"
+      ],
+      "suggestion": "抽取语义一致且无界面状态的折扣规则函数，将各入口接到同一实现；保留各场景特有规则，避免用大量开关堆成过度通用组件。",
+      "acceptance": "变更一个折扣边界时只修改一个规则实现；报价、合同与导出对同一输入给出一致金额，并覆盖边界与舍入用例。",
+      "reproduction": [
+        "示例：对照三处输入、条件与舍入逻辑，确认业务语义一致。",
+        "示例：列出同一规则变更需要同步修改的三个位置。"
+      ],
+      "priority": "后续处理 · 代码组织",
+      "root_cause_key": "g-003-synthetic",
+      "criterion_ids": [
+        "D1"
+      ],
+      "severity_reason": "示例：依据已描述的业务后果和影响范围判定，不以扫描工具等级直接代替判断。",
+      "blocker_rule_id": null,
+      "blocker_reason": ""
+    },
+    {
+      "id": "G-004",
+      "title": "领域模块反向依赖接口控制器并形成循环",
+      "type": "architecture",
+      "dimension_id": "C",
+      "status": "confirmed",
+      "severity": "medium",
+      "blocker": false,
+      "cause": "合同领域服务调用开票控制器，开票控制器又依赖合同服务，形成跨层循环。接口上下文参与领域调用，使模块边界与职责不清晰。",
+      "trigger": "调整合同或开票接口适配逻辑时，会牵动本应独立的领域逻辑与初始化依赖。",
+      "impact": "扩大修改影响范围和联动验证范围；当前示例未据此断言核心业务无法运行。",
+      "scope": [
+        "合同领域模块",
+        "开票接口适配层",
+        "依赖初始化链"
+      ],
+      "locations": [
+        "server/contracts/service.ts:9（虚构位置）",
+        "server/invoices/controller.ts:11（虚构位置）"
+      ],
+      "evidence_ids": [
+        "E-004"
+      ],
+      "suggestion": "把共享业务能力下沉到职责清晰的服务或端口，控制器负责输入输出适配；以实际调用关系解除该循环，不为此默认拆微服务。",
+      "acceptance": "合同领域模块不再导入开票控制器；双方通过明确服务接口调用，原有业务回归通过，并能单独替换接口适配层进行验证。",
+      "reproduction": [
+        "示例：沿import和调用关系绘出合同服务→开票控制器→合同服务的闭环。",
+        "示例：核对控制器上下文在领域调用中的传播位置。"
+      ],
+      "priority": "后续处理 · 架构边界",
+      "root_cause_key": "g-004-synthetic",
+      "criterion_ids": [
+        "C1"
+      ],
+      "severity_reason": "示例：依据已描述的业务后果和影响范围判定，不以扫描工具等级直接代替判断。",
+      "blocker_rule_id": null,
+      "blocker_reason": ""
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E-001",
+      "method": "示例 · 静态控制链审查与隔离接口验证",
+      "location": "DEMO-REVIEW-001 / 合同接口（虚构）",
+      "expected": "无权身份不能读取目标合同。",
+      "observed": "示例设定：无权身份得到合同内容，控制链未发现有效资源授权。",
+      "limitations": "虚构展示数据；未检查用户的真实项目。",
+      "is_demo": true
+    },
+    {
+      "id": "E-002",
+      "method": "示例 · 可控交错的并发验证",
+      "location": "DEMO-REVIEW-001 / 额度分配（虚构）",
+      "expected": "额度1仅产生一条成功分配。",
+      "observed": "示例设定：两个请求都成功，产生两条分配记录。",
+      "limitations": "虚构展示数据；所有请求、路径和结果仅供模板演示。",
+      "is_demo": true
+    },
+    {
+      "id": "E-003",
+      "method": "示例 · 同义规则与修改点对照",
+      "location": "DEMO-REVIEW-001 / 三处折扣规则（虚构）",
+      "expected": "同一折扣规则有一致且可集中维护的实现。",
+      "observed": "示例设定：相同逻辑分散在三处，同一变更需要同步修改三份。",
+      "limitations": "结构问题示例，不推断已发生金额Bug。",
+      "is_demo": true
+    },
+    {
+      "id": "E-004",
+      "method": "示例 · 模块依赖静态追踪",
+      "location": "DEMO-REVIEW-001 / 合同与开票模块（虚构）",
+      "expected": "领域服务与接口适配层职责清晰、依赖可隔离。",
+      "observed": "示例设定：存在反向依赖和跨层循环。",
+      "limitations": "不依据模块名称或技术风格打分；本处证据为虚构示意。",
+      "is_demo": true
+    },
+    {
+      "id": "E-005",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / A1（虚构证据位置）",
+      "expected": "已承诺的核心业务链真实完成，最终业务结果正确。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-006",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / A2（虚构证据位置）",
+      "expected": "计算、业务规则和状态流转符合已有需求。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-007",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / A3（虚构证据位置）",
+      "expected": "输入边界、校验与用户可见结果符合已承诺行为。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-008",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / B2（虚构证据位置）",
+      "expected": "不可信输入在实际可达路径上不会触发适用的注入、危险执行或越界访问。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-009",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / B3（虚构证据位置）",
+      "expected": "密钥和敏感信息在代码、前端、接口、配置和日志中受到适当保护。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-010",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / B4（虚构证据位置）",
+      "expected": "实际依赖与安全配置不存在未处理的适用安全缺陷。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-011",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / C2（虚构证据位置）",
+      "expected": "共享状态、会话和任务状态的归属符合实际生命周期与实例边界。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-012",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / C3（虚构证据位置）",
+      "expected": "设计复杂度与故障边界适合现有功能，未引入可证明的不必要风险。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-013",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / D2（虚构证据位置）",
+      "expected": "组件、公共逻辑与专用逻辑的划分适合实际复用需求。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-014",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / D3（虚构证据位置）",
+      "expected": "关键逻辑能定位、理解并独立验证，修改影响范围可控。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-015",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / E1（虚构证据位置）",
+      "expected": "数据和文件按约定持久保存，读取与重启后的结果正确。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-016",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / E2（虚构证据位置）",
+      "expected": "约束、事务及部分写入失败保持业务数据完整。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-017",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / E4（虚构证据位置）",
+      "expected": "重复请求、重试和乱序回调不会产生禁止的重复副作用或错误状态。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-018",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / F1（虚构证据位置）",
+      "expected": "超时、重试和依赖失败具有适当边界。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-019",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / F2（虚构证据位置）",
+      "expected": "已有后台任务可终止、释放资源，并按约定处理失败与重启。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-020",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / F3（虚构证据位置）",
+      "expected": "异常反馈和故障控制不会掩盖失败或造成不合理扩散。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-021",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / G1（虚构证据位置）",
+      "expected": "关键操作在约定负载和数据规模下达到性能要求。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-022",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / G2（虚构证据位置）",
+      "expected": "内存、连接、队列与外部调用成本保持可控。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-023",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / H1（虚构证据位置）",
+      "expected": "指定源码与依赖可以复现构建。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-024",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / H2（虚构证据位置）",
+      "expected": "配置与目标部署环境能够正确启动该版本。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-025",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / H3（虚构证据位置）",
+      "expected": "升级兼容与发布失败处置在适用场景可执行。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-026",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / I1（虚构证据位置）",
+      "expected": "关键故障能够被技术机制发现并定位。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    },
+    {
+      "id": "E-027",
+      "method": "示例 · 技术条件核对",
+      "location": "DEMO-REVIEW-001 / I2（虚构证据位置）",
+      "expected": "备份恢复或等效重建达到约定的数据可用性要求。",
+      "observed": "示例设定：满足当前检查范围内的预期。",
+      "limitations": "虚构展示记录；正式报告必须替换为实际代码、执行或平台证据。",
+      "is_demo": true
+    }
+  ],
+  "schema_version": "2.0",
+  "policy_version": "1.0",
+  "summary": {
+    "status": "complete",
+    "score": 59,
+    "provisional_upper": null,
+    "raw_score": 91,
+    "grade": "不合格",
+    "blocker_cap": 59,
+    "confirmed_blockers": [
+      "G-001",
+      "G-002"
+    ],
+    "critical_unknowns": [],
+    "applicable_criteria": 27,
+    "reviewed_criteria": 27,
+    "unknown_count": 0,
+    "na_count": 0,
+    "coverage": 100.0,
+    "weighted_deduction": 9,
+    "excluded_dimensions": [],
+    "active_weight": 100,
+    "dimensions": [
+      {
+        "id": "A",
+        "name": "功能实现与业务正确性",
+        "weight": 20,
+        "status": "complete",
+        "score": 100,
+        "provisional_score": 100,
+        "raw_deduction": 0,
+        "deducted": 0,
+        "applicable": 3,
+        "reviewed": 3,
+        "unknown": 0,
+        "na": 0,
+        "coverage": 100.0,
+        "finding_ids": [],
+        "effective_weight": 20,
+        "weighted_deduction": 0,
+        "contribution": 20
+      },
+      {
+        "id": "B",
+        "name": "代码与应用安全",
+        "weight": 20,
+        "status": "complete",
+        "score": 80,
+        "provisional_score": 80,
+        "raw_deduction": 20,
+        "deducted": 20,
+        "applicable": 4,
+        "reviewed": 4,
+        "unknown": 0,
+        "na": 0,
+        "coverage": 100.0,
+        "finding_ids": [
+          "G-001"
+        ],
+        "effective_weight": 20,
+        "weighted_deduction": 4,
+        "contribution": 16
+      },
+      {
+        "id": "C",
+        "name": "架构设计合理性",
+        "weight": 10,
+        "status": "complete",
+        "score": 90,
+        "provisional_score": 90,
+        "raw_deduction": 10,
+        "deducted": 10,
+        "applicable": 3,
+        "reviewed": 3,
+        "unknown": 0,
+        "na": 0,
+        "coverage": 100.0,
+        "finding_ids": [
+          "G-004"
+        ],
+        "effective_weight": 10,
+        "weighted_deduction": 1,
+        "contribution": 9
+      },
+      {
+        "id": "D",
+        "name": "代码组织与可维护性",
+        "weight": 10,
+        "status": "complete",
+        "score": 90,
+        "provisional_score": 90,
+        "raw_deduction": 10,
+        "deducted": 10,
+        "applicable": 3,
+        "reviewed": 3,
+        "unknown": 0,
+        "na": 0,
+        "coverage": 100.0,
+        "finding_ids": [
+          "G-003"
+        ],
+        "effective_weight": 10,
+        "weighted_deduction": 1,
+        "contribution": 9
+      },
+      {
+        "id": "E",
+        "name": "数据与并发正确性",
+        "weight": 15,
+        "status": "complete",
+        "score": 80,
+        "provisional_score": 80,
+        "raw_deduction": 20,
+        "deducted": 20,
+        "applicable": 4,
+        "reviewed": 4,
+        "unknown": 0,
+        "na": 0,
+        "coverage": 100.0,
+        "finding_ids": [
+          "G-002"
+        ],
+        "effective_weight": 15,
+        "weighted_deduction": 3,
+        "contribution": 12
+      },
+      {
+        "id": "F",
+        "name": "稳定性与异常处理",
+        "weight": 10,
+        "status": "complete",
+        "score": 100,
+        "provisional_score": 100,
+        "raw_deduction": 0,
+        "deducted": 0,
+        "applicable": 3,
+        "reviewed": 3,
+        "unknown": 0,
+        "na": 0,
+        "coverage": 100.0,
+        "finding_ids": [],
+        "effective_weight": 10,
+        "weighted_deduction": 0,
+        "contribution": 10
+      },
+      {
+        "id": "G",
+        "name": "性能与资源控制",
+        "weight": 5,
+        "status": "complete",
+        "score": 100,
+        "provisional_score": 100,
+        "raw_deduction": 0,
+        "deducted": 0,
+        "applicable": 2,
+        "reviewed": 2,
+        "unknown": 0,
+        "na": 0,
+        "coverage": 100.0,
+        "finding_ids": [],
+        "effective_weight": 5,
+        "weighted_deduction": 0,
+        "contribution": 5
+      },
+      {
+        "id": "H",
+        "name": "构建部署与版本变更",
+        "weight": 5,
+        "status": "complete",
+        "score": 100,
+        "provisional_score": 100,
+        "raw_deduction": 0,
+        "deducted": 0,
+        "applicable": 3,
+        "reviewed": 3,
+        "unknown": 0,
+        "na": 0,
+        "coverage": 100.0,
+        "finding_ids": [],
+        "effective_weight": 5,
+        "weighted_deduction": 0,
+        "contribution": 5
+      },
+      {
+        "id": "I",
+        "name": "故障发现与恢复能力",
+        "weight": 5,
+        "status": "complete",
+        "score": 100,
+        "provisional_score": 100,
+        "raw_deduction": 0,
+        "deducted": 0,
+        "applicable": 2,
+        "reviewed": 2,
+        "unknown": 0,
+        "na": 0,
+        "coverage": 100.0,
+        "finding_ids": [],
+        "effective_weight": 5,
+        "weighted_deduction": 0,
+        "contribution": 5
+      }
+    ],
+    "finding_deductions": [
+      {
+        "id": "G-001",
+        "points": 20,
+        "weighted_impact_before_cap": 4,
+        "policy_basis": "high: 20 / 100"
+      },
+      {
+        "id": "G-002",
+        "points": 20,
+        "weighted_impact_before_cap": 3,
+        "policy_basis": "high: 20 / 100"
+      },
+      {
+        "id": "G-003",
+        "points": 10,
+        "weighted_impact_before_cap": 1,
+        "policy_basis": "medium: 10 / 100"
+      },
+      {
+        "id": "G-004",
+        "points": 10,
+        "weighted_impact_before_cap": 1,
+        "policy_basis": "medium: 10 / 100"
+      }
+    ],
+    "rubric_sha256": "aa5e97fdf32aca587b57668e8b6d03a3899ae559d4e6e70220b50685b9cadc4e",
+    "policy_sha256": "d14692628566ed2dc5685e00274665688cd345cf21555ed9849ca9f78b01643d",
+    "rule_snapshot": {
+      "rubric": {
+        "rubric_version": "3.0",
+        "description": "九维固定权重。指标无分值；确认问题按独立策略扣分。新增指标不重分指标权重。",
+        "dimensions": [
+          {
+            "id": "A",
+            "name": "功能实现与业务正确性",
+            "name_en": "Functional \u0026 business correctness",
+            "weight": 20,
+            "criteria": [
+              {
+                "id": "A1",
+                "title": "核心业务链真实完成",
+                "requirement": "沿已承诺的核心流程追到真实存储或外部结果；检查占位接口、假成功、Mock 与漏实现。",
+                "proof": "基于明确预期的关键链运行证据；只有静态代码时不得据此证明整体运行通过。",
+                "critical_review": true,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "A2",
+                "title": "业务规则与计算结果正确",
+                "requirement": "核对有来源的计算、状态转换、输入边界与数据展示；不能以当前输出反推预期。",
+                "proof": "需求或规则来源、实现路径、边界输入及预期/实际对照。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "A3",
+                "title": "既有交互与输出正确",
+                "requirement": "检查既有搜索、筛选、分页、导出、取消和错误反馈对实际结果的影响。",
+                "proof": "代表性用例与输出核对；不要求增加新交互。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              }
+            ]
+          },
+          {
+            "id": "B",
+            "name": "代码与应用安全",
+            "name_en": "Code \u0026 application security",
+            "weight": 20,
+            "criteria": [
+              {
+                "id": "B1",
+                "title": "身份与对象权限边界有效",
+                "requirement": "追踪登录、会话、角色、对象、文件、后台和租户边界；检查全局与外置控制后判断。",
+                "proof": "允许与拒绝路径；适用身份和对象的直接接口验证或足以确认缺陷的完整静态控制链。",
+                "critical_review": true,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "B2",
+                "title": "不可信输入不会触发适用的危险行为",
+                "requirement": "按攻击面审查注入、XSS、路径穿越、上传、SSRF、反序列化等；不对不适用技术硬套检查。",
+                "proof": "输入到危险操作的完整数据流、可达前提、现有防护与隔离复现。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "B3",
+                "title": "秘密与敏感数据受保护",
+                "requirement": "核对前端产物、接口、配置、日志、调试入口、会话信息与存储的实际暴露条件。",
+                "proof": "脱敏位置、实际暴露范围、配置或运行证据；不保留秘密原文。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "B4",
+                "title": "依赖与部署暴露风险得到有效控制",
+                "requirement": "核对锁定版本、交付产物、官方漏洞公告、触发条件、默认凭据和实际开放端口。",
+                "proof": "扫描结果人工复核、版本与可达性/构建暴露分析；无告警不代表无漏洞。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              }
+            ]
+          },
+          {
+            "id": "C",
+            "name": "架构设计合理性",
+            "name_en": "Architecture suitability",
+            "weight": 10,
+            "criteria": [
+              {
+                "id": "C1",
+                "title": "模块与层次职责有合理边界",
+                "requirement": "检查跨层反向调用、循环依赖、业务与协议上下文耦合及由此产生的具体影响。",
+                "proof": "依赖链、职责边界及修改/故障影响；不因不用某框架而扣分。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "C2",
+                "title": "状态与运行拓扑匹配",
+                "requirement": "核对单进程内存状态、会话、文件、缓存与实际多实例/重启条件是否兼容。",
+                "proof": "部署拓扑来源、状态生命周期与失败或不一致路径；不预设必须分布式。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "C3",
+                "title": "关键依赖与执行方式适合业务约束",
+                "requirement": "检查跨服务同步长链、不可终止任务、无界扇出及不合理的可靠性假设。",
+                "proof": "关键路径、依赖边界与具体风险；运行表现已归别项的同根问题不重复扣分。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              }
+            ]
+          },
+          {
+            "id": "D",
+            "name": "代码组织与可维护性",
+            "name_en": "Code organization \u0026 maintainability",
+            "weight": 10,
+            "criteria": [
+              {
+                "id": "D1",
+                "title": "同一业务语义避免多处复制",
+                "requirement": "检查同一规则、校验或组件复制导致的多点修改、版本漂移及已有不一致。",
+                "proof": "至少两处位置、相同业务语义、共同变化原因及影响；相似语法不是抽象的充分理由。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "D2",
+                "title": "公共能力和模块接口有合理抽离",
+                "requirement": "检查重复组件与工具实现、散落配置、过度通用基类和巨型模块造成的实际维护困难。",
+                "proof": "调用点与修改影响；不要求为了复用而过度抽象，也不按行数判错。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "D3",
+                "title": "核心逻辑可定位并隔离验证",
+                "requirement": "检查隐式全局依赖、业务规则与基础设施混杂、难以控制副作用的结构。",
+                "proof": "关键规则定位、可验证边界、实际修改/测试障碍；不按测试数量或覆盖率直接扣分。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              }
+            ]
+          },
+          {
+            "id": "E",
+            "name": "数据与并发正确性",
+            "name_en": "Data \u0026 concurrency correctness",
+            "weight": 15,
+            "criteria": [
+              {
+                "id": "E1",
+                "title": "持久化与数据关联正确",
+                "requirement": "核对写后读取、重启、文件位置、主明细和关系约束，避免演示状态代替持久化。",
+                "proof": "数据/文件状态核对与重启或可靠重建证据。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "E2",
+                "title": "事务与部分失败保持一致",
+                "requirement": "检查事务边界、跨资源写入、异步步骤失败、隔离级别和补偿语义。",
+                "proof": "中断/失败场景和最终状态；不凭使用事务注解就判通过。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "E3",
+                "title": "并发共享状态遵守业务不变量",
+                "requirement": "检查线程、协程、多进程、多请求和多实例；竞态、丢更新、锁顺序、死锁、检查后使用、锁粒度与数据库约束。",
+                "proof": "并发交错推导或隔离并发验证、最终数据状态；单进程锁不能证明跨实例安全。",
+                "critical_review": true,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "E4",
+                "title": "重复与乱序不会造成禁止的副作用",
+                "requirement": "核对重试、消息重复/乱序、回调、定时任务重入、幂等键生命周期及崩溃窗口。",
+                "proof": "重复、乱序、重启后重试与结果关联；按现有业务语义，不预设所有操作须去重。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              }
+            ]
+          },
+          {
+            "id": "F",
+            "name": "稳定性与异常处理",
+            "name_en": "Reliability \u0026 failure handling",
+            "weight": 10,
+            "criteria": [
+              {
+                "id": "F1",
+                "title": "异常结果与错误状态正确传播",
+                "requirement": "检查吞异常、假成功、半完成状态、对依赖失败的隔离及用户可观察行为。",
+                "proof": "失败路径、错误分类与最终状态。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "F2",
+                "title": "超时重试取消有边界",
+                "requirement": "检查无限等待、重试风暴、重复副作用、取消失效与过期结果回写。",
+                "proof": "超时/重试预算、取消终止与资源回收证据。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "F3",
+                "title": "后台任务与长时间运行不会失控",
+                "requirement": "检查任务中断、连接和资源泄漏、崩溃后处理、积压与故障扩散。",
+                "proof": "代表性持续运行或中断恢复结果，说明观察时长限制。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              }
+            ]
+          },
+          {
+            "id": "G",
+            "name": "性能与资源控制",
+            "name_en": "Performance \u0026 resource control",
+            "weight": 5,
+            "criteria": [
+              {
+                "id": "G1",
+                "title": "目标规模下关键操作可接受",
+                "requirement": "按有来源的并发/数据量检查响应时间、查询、分页、索引、N+1 和外部调用。",
+                "proof": "目标来源、负载模型、代表性测量和瓶颈；目标缺失记未知，不能假设高并发。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "G2",
+                "title": "资源与成本消耗有界",
+                "requirement": "检查内存、连接、队列、文件与调用预算；仅 AI 产品检查模型/工具成本。",
+                "proof": "峰值/持续消耗和限流/配额等实际生效证据。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              }
+            ]
+          },
+          {
+            "id": "H",
+            "name": "构建部署与版本变更",
+            "name_en": "Build, deployment \u0026 change safety",
+            "weight": 5,
+            "criteria": [
+              {
+                "id": "H1",
+                "title": "指定源码可构建并在目标条件启动",
+                "requirement": "检查依赖版本、配置、系统差异、产物与源码关联及实际启动。",
+                "proof": "干净隔离环境构建/启动证据；没有流水线本身不扣分。",
+                "critical_review": true,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "H2",
+                "title": "升级与历史数据兼容",
+                "requirement": "检查迁移顺序、老数据、滚动升级兼容和配置变化。",
+                "proof": "隔离升级和兼容证据；无持久数据迁移可有理由标不适用。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "H3",
+                "title": "发布失败有技术处置路径",
+                "requirement": "验证回退、前向修复或等效恢复，分别处理数据与外部副作用。",
+                "proof": "实际演练或足够的适用证据；不因有回滚命令就判通过。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              }
+            ]
+          },
+          {
+            "id": "I",
+            "name": "故障发现与恢复能力",
+            "name_en": "Observability \u0026 recovery",
+            "weight": 5,
+            "criteria": [
+              {
+                "id": "I1",
+                "title": "关键故障能发现与定位",
+                "requirement": "核对脱敏日志、请求/任务关联、健康信号与适用通知机制；不要求监控大屏或指定责任人。",
+                "proof": "触发故障后可见的信号和定位过程；平台能力与应用能力一起核查。",
+                "critical_review": false,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              },
+              {
+                "id": "I2",
+                "title": "重要数据可按条件恢复或可靠重建",
+                "requirement": "核对备份、隔离恢复、恢复后数据、耗时与可接受丢失范围；可重建无状态服务按其真实条件评估。",
+                "proof": "对应环境的实际恢复/重建结果及限制；仅有备份配置不代表可恢复。",
+                "critical_review": true,
+                "applicability": "依据既有功能、运行拓扑和交付基线判断；不因缺证据而标为不适用。",
+                "pass_condition": "适用范围内的技术要求得到可定位证据支持。",
+                "fail_condition": "存在有证据支持、违反本指标要求的实际缺陷或结构风险；不能仅凭风格偏好或工具告警判失败。",
+                "deduplication": "同一根因合并为一个问题，可关联多个指标；只在问题的主维度扣一次。"
+              }
+            ]
+          }
+        ]
+      },
+      "policy": {
+        "policy_version": "1.0",
+        "mode": "dimension_deductions",
+        "dimension_base": 100,
+        "severity_deductions": {
+          "low": 3,
+          "medium": 10,
+          "high": 20,
+          "critical": 40
+        },
+        "severity_guidance": {
+          "low": "局部、有限的实际影响；不是纯风格偏好。",
+          "medium": "明确影响部分行为、维护成本或运行可靠性。",
+          "high": "影响重要流程、重要数据或较大范围。",
+          "critical": "严重安全、数据或核心业务后果。"
+        },
+        "grades": {
+          "good": 80,
+          "pass": 60
+        },
+        "blocker_cap": 59,
+        "dimension_na_policy": "exclude_and_normalize",
+        "blocker_rules": [
+          {
+            "id": "SEC-EXPLOIT",
+            "title": "已确认可利用的严重安全漏洞",
+            "dimensions": [
+              "B"
+            ],
+            "condition": "可越权访问重要数据、执行未授权危险操作或产生同等级安全后果；须给出证据和触发前提。"
+          },
+          {
+            "id": "CORE-FAILURE",
+            "title": "核心业务无法正确完成",
+            "dimensions": [
+              "A",
+              "C",
+              "E",
+              "F"
+            ],
+            "condition": "在约定使用条件下核心业务无法完成或重要结果错误，且存在明确技术证据。"
+          },
+          {
+            "id": "DATA-CORRUPTION",
+            "title": "重要数据损坏、丢失或关键不变量被破坏",
+            "dimensions": [
+              "E",
+              "F",
+              "I"
+            ],
+            "condition": "已确认重要数据丢失、损坏、超分配或等效严重一致性后果。"
+          },
+          {
+            "id": "CANNOT-DEPLOY",
+            "title": "约定环境无法部署启动",
+            "dimensions": [
+              "H"
+            ],
+            "condition": "指定交付版本在约定目标条件下无法构建或启动。"
+          },
+          {
+            "id": "NO-RECOVERY",
+            "title": "重要数据无法按约定条件恢复",
+            "dimensions": [
+              "I"
+            ],
+            "condition": "已确认重要数据不能按明确的恢复条件恢复或可靠重建。"
+          }
+        ]
+      }
+    }
+  }
+}</script>
+<script>
+(()=>{'use strict';
+const root=document.getElementById('report-root');
+const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const arr=value=>Array.isArray(value)?value:[];
+const finite=value=>typeof value==='number'&&Number.isFinite(value);
+const num=value=>finite(value)?value:0;
+const fmt=value=>finite(value)?String(value):'—';
+const percent=value=>Math.min(100,Math.max(0,num(value)));
+const text=value=>String(value??'').trim()||'待补充';
+let data;
+try{data=JSON.parse(document.getElementById('report-data').textContent);if(!data||typeof data!=='object'||!data.summary)throw new Error('缺少有效的报告数据或评分结果');}
+catch(error){root.innerHTML='<div class="fatal"><h2>报告数据尚未就绪</h2><p>此文件为固定模板，需要填入经过校验的审查数据后生成正式报告。</p><p>'+esc(error.message)+'</p></div>';document.getElementById('print-button').disabled=true;return;}
+const meta=data.meta||{},summary=data.summary||{},baseline=data.baseline||{};
+const dimensions=arr(summary.dimensions),findings=arr(data.findings),checks=arr(data.checks),evidence=arr(data.evidence);
+const dimensionMap=new Map(dimensions.map(d=>[String(d.id),d]));
+const findingMap=new Map(findings.map((f,i)=>[String(f.id),{...f,anchor:'finding-'+i}]));
+const evidenceMap=new Map(evidence.map((e,i)=>[String(e.id),{...e,anchor:'evidence-'+i}]));
+const checkMap=new Map(checks.map((c,i)=>[String(c.id),{...c,anchor:'check-'+i}]));
+const deductionMap=new Map(arr(summary.finding_deductions).map(d=>[String(d.id),d]));
+const unknownChecks=checks.filter(c=>c.status==='unknown');
+const criticalUnknownIds=new Set(arr(summary.critical_unknowns).map(String));
+const criticalUnknownChecks=unknownChecks.filter(c=>c.critical===true||criticalUnknownIds.has(String(c.id)));
+const ordinaryUnknownChecks=unknownChecks.filter(c=>!(c.critical===true||criticalUnknownIds.has(String(c.id))));
+const typeLabels={vulnerability:'安全漏洞',bug:'一般 Bug',architecture:'架构问题',organization:'代码组织',verification:'验证缺口'};
+const severityLabels={critical:'致命',high:'严重',medium:'中等',low:'轻微'};
+const statusLabels={pass:'已满足',fail:'确认不满足',unknown:'待验证',na:'不适用'};
+const statusTones={pass:'teal',fail:'red',unknown:'amber',na:'outline'};
+const severityClass=value=>Object.hasOwn(severityLabels,value)?value:'medium';
+const blocked=arr(summary.confirmed_blockers).length>0;
+const complete=summary.status==='complete'&&finite(summary.score);
+const partial=summary.status==='partial';
+const cap=finite(summary.blocker_cap)?summary.blocker_cap:null;
+const scoreDisplay=complete?fmt(summary.score):(partial&&finite(summary.provisional_upper)?'≤ '+fmt(summary.provisional_upper):'未评估');
+const scoreClass=complete?'':(partial?'interval':'no-score');
+const gradeTone=blocked?'bad':complete?(summary.score>=80?'good':summary.score>=60?'warn':'bad'):'warn';
+const totalConfirmed=findings.filter(f=>f.status==='confirmed').length;
+const confirmedVulns=findings.filter(f=>f.status==='confirmed'&&f.type==='vulnerability').length;
+const confirmedBugs=findings.filter(f=>f.status==='confirmed'&&f.type==='bug').length;
+const structural=findings.filter(f=>f.status==='confirmed'&&['architecture','organization'].includes(f.type)).length;
+const unknownFindings=findings.filter(f=>f.status==='unknown').length;
+const dName=id=>dimensionMap.get(String(id))?.name||String(id||'未分类');
+function badge(label,tone=''){return '<span class="badge '+tone+'">'+esc(label)+'</span>';}
+function evidenceLinks(ids){const values=arr(ids);return values.length?'<div class="evidence-links">'+values.map(id=>{const item=evidenceMap.get(String(id));return item?'<a class="evidence-link" href="#'+item.anchor+'">'+esc(id)+'</a>':'<span class="badge outline">'+esc(id)+' · 未提供条目</span>';}).join('')+'</div>':'';}
+function list(values,cls=''){const items=arr(values);return items.length?'<ul'+(cls?' class="'+cls+'"':'')+'>'+items.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul>':'<p class="muted">尚未提供。</p>';}
+function empty(title,description){return '<div class="empty-state"><strong>'+esc(title)+'</strong>'+esc(description)+'</div>';}
+function field(label,content,extra=''){return '<div class="field '+extra+'"><div class="field-label">'+esc(label)+'</div>'+content+'</div>';}
+function dimensionRows(){return dimensions.map(d=>{
+const state={complete:'已完成',partial:'暂评上限',unreviewed:'未评估',not_applicable:'不适用'}[d.status]||'未评估';
+const value=finite(d.score)?fmt(d.score):(finite(d.provisional_score)?'≤ '+fmt(d.provisional_score):'—');
+return `<tr><td><button type="button" class="dimension-button" data-dimension="${esc(d.id)}"><span class="dimension-letter">${esc(d.id)}</span><span><span class="dimension-name">${esc(d.name)}</span><small>固定权重 ${fmt(d.weight)}% · 有效 ${fmt(d.effective_weight)}%</small></span></button></td><td><span class="earned">${value}<small>/ 100</small></span><div class="muted">${state}</div></td><td><div class="stack"><span class="pass" style="width:${finite(d.provisional_score)?num(d.provisional_score):0}%"></span><span class="fail" style="width:${num(d.deducted)}%"></span><span class="unknown" style="width:${d.status==='unreviewed'?100:0}%"></span></div><small class="muted">累计扣分 ${fmt(d.raw_deduction)} / 实扣 ${fmt(d.deducted)}</small></td><td class="score-cell fail">−${fmt(d.weighted_deduction)}</td><td class="score-cell pending">${fmt(d.unknown)} 项</td><td class="score-cell muted">${fmt(d.coverage)}%<small style="display:block">${d.reviewed}/${d.applicable} 指标</small></td></tr>`;
+}).join('');}
+function findingHtml(f,index){const deduction=deductionMap.get(String(f.id))||{};const points=num(deduction.points),pending=num(deduction.pending_points);const status=f.status==='confirmed'?'已确认':'待验证';const related=checks.filter(c=>arr(c.finding_ids).includes(f.id));const pointMarkup=points>0?'<div class="issue-points">−'+fmt(points)+'<small>维度内扣分 / 100</small></div>':pending>0?'<div class="issue-points pending">'+fmt(pending)+'<small>待验证分值 · 未扣分</small></div>':'<div class="issue-points none">—<small>未产生直接扣分</small></div>';
+const charges='<p>扣分依据：'+esc(deduction.policy_basis||'尚未确认，不扣分')+'；总分影响（维度封底前）：−'+fmt(deduction.weighted_impact_before_cap)+' 分。</p><p>'+esc(f.severity_reason)+'</p><div class="check-charges">'+related.map(c=>'<a class="charge" href="#'+checkMap.get(String(c.id)).anchor+'">'+esc(c.id)+' · '+esc(statusLabels[c.status])+'</a>').join('')+'</div><p class="tiny-note">一个根因可命中多个指标，只在主维度扣一次。维度最多扣100分；上述总分影响为封底前单项值。</p>'+(f.blocker?'<div class="impact-box"><strong>阻断规则 '+esc(f.blocker_rule_id)+'</strong><p>'+esc(f.blocker_reason)+'</p></div>':'');
+return '<details class="issue-card sev-'+severityClass(f.severity)+'" id="finding-'+index+'" data-finding-index="'+index+'"'+(index===0&&f.blocker?' open':'')+'><summary><div class="issue-main"><div class="issue-topline"><span class="issue-id">'+esc(f.id)+'</span>'+badge(typeLabels[f.type]||f.type||'问题','navy')+badge(severityLabels[f.severity]||'待定',(f.severity==='critical'||f.severity==='high')?'red':f.severity==='medium'?'amber':'outline')+badge(status,f.status==='confirmed'?'teal':'amber')+(f.blocker?badge('上线阻断','red'):'')+'</div><div class="issue-title">'+esc(f.title)+'</div><div class="issue-dim">'+esc(dName(f.dimension_id))+(f.priority?' · '+esc(f.priority):'')+'</div></div><div class="issue-right">'+pointMarkup+'<span class="chevron" aria-hidden="true"></span></div></summary><div class="issue-content"><div class="issue-fields">'+field('扣分 / 判断原因','<p>'+esc(text(f.cause))+'</p>')+field('触发条件','<p>'+esc(text(f.trigger))+'</p>')+field('影响与范围','<div class="impact-box"><p>'+esc(text(f.impact))+'</p>'+(arr(f.scope).length?'<div class="scope-tags">'+arr(f.scope).map(s=>'<span>'+esc(s)+'</span>').join('')+'</div>':'')+'</div>','full')+field('代码位置与证据','<div class="location-list">'+(arr(f.locations).length?arr(f.locations).map(s=>'<code>'+esc(s)+'</code>').join(''):'<p class="muted">尚未提供位置。</p>')+'</div>'+evidenceLinks(f.evidence_ids))+field('验证 / 复现过程',arr(f.reproduction).length?'<ol>'+arr(f.reproduction).map(s=>'<li>'+esc(s)+'</li>').join('')+'</ol>':'<p class="muted">尚未提供；不得据此声称已运行复现。</p>')+field('最小处理建议','<div class="recommendation"><p>'+esc(text(f.suggestion))+'</p></div>')+field('完成后的复验标准','<div class="acceptance"><p>'+esc(text(f.acceptance))+'</p></div>')+field('扣分依据与关联指标',charges,'full')+'</div></div></details>';}
+function unknownHtml(){
+if(!unknownChecks.length)return empty('当前没有登记待验证项','这只说明本报告未登记未知条目，不代表未检查范围已经通过。');
+const group=(items,critical)=>'<div class="unknown-group"><div class="unknown-group-head"><h3>'+ (critical?'关键待验证项':'普通待验证项')+'</h3>'+badge(items.length+' 项',critical?'amber':'outline')+'</div>'+(items.length?'<div class="unknown-grid">'+items.map(check=>{const finding=arr(check.finding_ids).length?findingMap.get(String(check.finding_ids[0])):null;return '<article class="unknown-card"><div class="unknown-head"><h3>'+esc(check.id)+' · '+esc(check.criterion)+'</h3>'+badge(critical?'关键条件未验证':'待补充验证',critical?'amber':'outline')+'</div><p>'+esc(check.reason||'尚缺足够证据，无法作出通过或失败的判断。')+'</p>'+(finding&&finding.suggestion?'<p style="margin-top:8px">'+esc(finding.suggestion)+'</p>':'')+'<div class="unknown-foot"><span>待验证指标 · 未扣分</span>'+(finding?'<a href="#'+finding.anchor+'">'+esc(finding.id)+' · 查看验证项 →</a>':'<span>未关联问题条目</span>')+'</div></article>';}).join('')+'</div>':'<p class="muted" style="font-size:12px">当前未登记此类待验证项；未覆盖范围仍需结合诊断限制阅读。</p>')+'</div>';
+return group(criticalUnknownChecks,true)+group(ordinaryUnknownChecks,false);
+}
+function checksRows(){return checks.map((c,i)=>'<tr id="check-'+i+'"><td><span class="check-id">'+esc(c.id)+'</span>'+(c.critical?'<div>'+badge('关键验证','outline')+'</div>':'')+'</td><td class="check-id">'+esc(c.criterion)+'<div class="muted" style="white-space:normal">'+esc(c.requirement)+'</div></td><td>'+badge(statusLabels[c.status],statusTones[c.status])+'</td><td class="reason">'+esc(c.reason)+'<div class="muted">范围：'+esc(arr(c.scope_refs).join('、'))+'</div></td><td>'+evidenceLinks(c.evidence_ids)+arr(c.finding_ids).map(id=>'<a class="check-link" href="#'+findingMap.get(id).anchor+'">'+esc(id)+' →</a>').join(' ')+'</td></tr>').join('');}
+function evidenceHtml(){return evidence.length?'<div class="evidence-grid">'+evidence.map((e,i)=>'<article class="evidence-card" id="evidence-'+i+'"><div class="evidence-header"><strong>'+esc(e.id)+'</strong><span>'+esc(e.method||'证据类型待定')+'</span></div><div class="evidence-location">'+esc(text(e.location))+'</div><div class="evidence-pair"><span>预期</span><p>'+esc(text(e.expected))+'</p></div><div class="evidence-pair"><span>观察</span><p>'+esc(text(e.observed))+'</p></div><div class="evidence-pair"><span>限制</span><p>'+esc(e.limitations||'未单独记录；以报告范围为准。')+'</p></div></article>').join('')+'</div>':empty('尚未附上证据','正式审查需记录可定位的代码、执行结果或平台证据；模板本身不构成项目通过的证明。');}
+let scoreNote=summary.status==='unscored'?'尚未形成可计分的审查证据；不默认100分。':complete?'已完成本次约定范围的检查，不代表未发现范围绝对安全。':'这是基于已确认扣分的暂评上限，不是最终分数；未知不是确认扣分。';
+if(cap!==null)scoreNote+=' 基础'+(complete?'分':'暂评上限')+' <strong>'+fmt(summary.raw_score)+'</strong>；确认技术阻断使上限为 <strong>'+fmt(cap)+'</strong>，封顶差额不冒充扣分项。';
+const scoreStatusLabel=complete?'已完成计分':partial?'暂评上限 · 审查未完成':'尚未评估';
+root.innerHTML=(meta.is_demo?'<div class="demo-banner"><span class="demo-dot" aria-hidden="true"></span><div><strong>示例数据 · 非真实项目审查</strong><br>本页用于展示固定报告的结构、评分与问题展开效果。项目、代码位置、证据和问题均为演示内容。</div></div>':'')+
+`<section id="overview"><div class="report-head"><div><div class="eyebrow">SOFTWARE ENGINEERING REVIEW / DEDUCTION MODEL</div><h1 id="report-title">${esc(meta.title)}</h1><div class="project-line"><span>${esc(meta.project)}</span><span>${esc(meta.version)}</span></div></div><div class="head-meta"><div><span>审查时间</span><strong>${esc(meta.reviewed_at)}</strong></div><div><span>代码快照</span><strong class="mono">${esc(meta.snapshot)}</strong></div><div><span>验证环境</span><strong>${esc(meta.environment)}</strong></div></div></div><div class="overview-grid"><article class="score-card"><div class="card-kicker"><span>技术就绪评分</span><span>${scoreStatusLabel}</span></div><div class="score"><strong class="${scoreClass}">${esc(scoreDisplay)}</strong>${summary.status!=='unscored'?'<span>/ 100</span>':''}</div><div class="grade-line"><span class="grade-chip ${gradeTone}">${esc(summary.grade)}</span></div><div class="score-note">${scoreNote}</div></article><div class="metric-grid"><article class="metric"><div class="metric-label">检查完成度<span>按原始指标计数</span></div><div class="metric-value value-teal">${fmt(summary.coverage)}<small>%</small></div><div class="metric-sub">${summary.reviewed_criteria} / ${summary.applicable_criteria} 个适用指标；不参与加分</div></article><article class="metric"><div class="metric-label">确认扣分<span>折合综合总分</span></div><div class="metric-value value-red">${fmt(summary.weighted_deduction)}<small>分</small></div><div class="metric-sub">${totalConfirmed} 个确认根因；同一根因只扣一次</div></article><article class="metric"><div class="metric-label">确认技术阻断<span>独立于扣分</span></div><div class="metric-value value-red">${summary.confirmed_blockers.length}<small>项</small></div><div class="metric-sub">严重度不自动等于阻断，须匹配阻断规则</div></article><article class="metric"><div class="metric-label">待验证指标<span>不算已确认缺陷</span></div><div class="metric-value value-amber">${summary.unknown_count}<small>项</small></div><div class="metric-sub">关键 ${summary.critical_unknowns.length} 项；不以大量低风险检查替代关键验证</div></article></div></div><div class="conclusion ${blocked?'blocked':''}"><h3>审查结论</h3><p>${esc(data.conclusion)}</p></div></section>`+
+`<section class="section" id="dimensions"><div class="section-head"><div><div class="section-title"><span class="section-number">01</span><h2>各维度评分</h2></div><div class="section-desc">每维度满分100，按确认问题扣分，再按固定维度权重汇总。点击维度筛选问题。</div></div><div class="section-note">量表 ${esc(data.rubric_version)} / 策略 ${esc(data.policy_version)}<br>指标无分值，不需要合计100</div></div><div class="panel"><div class="table-scroll"><table class="dimensions-table"><thead><tr><th>技术维度与权重</th><th>维度得分</th><th>维度内扣分</th><th>总分扣分</th><th>待验证</th><th>检查完成度</th></tr></thead><tbody>${dimensionRows()}</tbody></table></div><div class="table-foot"><div class="sum-line"><span>综合基础${complete?'分':'暂评上限'} <strong>${fmt(summary.raw_score)}</strong></span><span>确认扣分 <strong>${fmt(summary.weighted_deduction)}</strong></span><span>待验证 <strong>${summary.unknown_count} 项</strong></span><span>不适用 <strong>${summary.na_count} 项</strong></span></div></div></div><p class="tiny-note">未检查不显示正式100分。检查完成度按原始指标而非子检查数量计算；覆盖度不是质量分。全部指标有理由不适用的维度才从综合分母剔除，并公开有效权重。本报告剔除维度：${esc(summary.excluded_dimensions.join('、')||'无')}。</p></section>`+
+'<section class="section" id="findings" aria-labelledby="findings-title"><div class="section-head"><div><div class="section-title"><span class="section-number">02</span><h2 id="findings-title">扣分项与问题详情</h2></div><div class="section-desc">每个问题均可追溯到技术要求、证据与复验标准。</div></div><div class="issue-stats">'+badge('漏洞 '+confirmedVulns,'red')+badge('Bug '+confirmedBugs,'navy')+badge('结构问题 '+structural,'navy')+badge('待验证 '+unknownFindings,'amber')+'</div></div><div class="filter-panel no-print"><div class="filter-grid"><div class="filter-field"><label for="filter-search">搜索问题、代码位置或建议</label><input id="filter-search" type="search" placeholder="例如：重复提交、公共组件、越权" autocomplete="off"></div><div class="filter-field"><label for="filter-dimension">评分维度</label><select id="filter-dimension"><option value="">全部维度</option>'+dimensions.map(d=>'<option value="'+esc(d.id)+'">'+esc(d.name)+'</option>').join('')+'</select></div><div class="filter-field"><label for="filter-severity">严重程度</label><select id="filter-severity"><option value="">全部程度</option><option value="critical">致命</option><option value="high">严重</option><option value="medium">中等</option><option value="low">轻微</option></select></div><div class="filter-field"><label for="filter-status">证据状态</label><select id="filter-status"><option value="">全部状态</option><option value="confirmed">已确认</option><option value="unknown">待验证</option></select></div><div class="filter-field"><label for="filter-blocker">上线影响</label><select id="filter-blocker"><option value="">全部问题</option><option value="yes">仅确认阻断</option><option value="no">非阻断问题</option></select></div></div><div class="filter-bottom"><div class="filter-count" id="filter-count" aria-live="polite"></div><div class="filter-actions"><button class="btn text" id="reset-filters" type="button">重置筛选</button><button class="btn text" id="expand-all" type="button">展开结果</button><button class="btn text" id="collapse-all" type="button">收起结果</button></div></div></div><div class="issue-list" id="issue-list">'+findings.map(findingHtml).join('')+'</div><div id="no-findings"'+(findings.length?' hidden':'')+'>'+empty(findings.length?'没有符合筛选条件的问题':'尚未登记问题',findings.length?'调整筛选条件或重置筛选，查看完整问题清单。':'尚未登记不等于已验证通过，请结合检查明细与证据覆盖情况。')+'</div><div class="print-meta">打印视图包含全部问题、完整详情与检查记录，不受屏幕筛选条件影响。</div></section>'+
+'<section class="section" id="unknowns" aria-labelledby="unknown-title"><div class="section-head"><div><div class="section-title"><span class="section-number">03</span><h2 id="unknown-title">待验证项</h2></div><div class="section-desc">这些条目尚无充分结论，不能写成已确认缺陷，也不能视为通过。</div></div><div class="section-note">'+criticalUnknownChecks.length+' 项关键 / '+ordinaryUnknownChecks.length+' 项普通</div></div>'+unknownHtml()+'</section>'+
+'<section class="section" id="baseline" aria-labelledby="baseline-title"><div class="section-head"><div><div class="section-title"><span class="section-number">04</span><h2 id="baseline-title">交付基线与检查范围</h2></div><div class="section-desc">评分绑定具体功能、版本、使用条件与验证环境。</div></div>'+badge(data.baseline_ready?'基线已建立':'基线待建立',data.baseline_ready?'teal':'amber')+'</div><div class="baseline-grid"><div class="panel inner-panel"><h3 class="subhead">本次功能范围</h3>'+list(baseline.scope,'scope-list')+'</div><div class="panel"><table class="conditions-table"><tbody>'+arr(baseline.conditions).map(c=>'<tr><th>'+esc(c.label)+'</th><td>'+esc(c.value)+'<span class="condition-status">'+esc(c.status||'确认状态待补充')+'</span><span class="condition-status">来源：'+esc(c.source||'未提供来源')+'</span></td></tr>').join('')+'</tbody></table></div></div>'+(arr(baseline.key_flows).length?'<div class="flow-grid">'+arr(baseline.key_flows).map(f=>'<article class="flow-card"><div class="flow-top"><span class="issue-id">'+esc(f.id)+'</span>'+badge(f.status||'待检查','outline')+'</div><div class="flow-name">'+esc(f.name)+'</div><p>'+esc(f.expected)+'</p>'+evidenceLinks(f.evidence_ids)+'</article>').join('')+'</div>':'')+'<div class="limitation-box"><h3>未覆盖范围与诊断限制</h3>'+list(baseline.limitations)+'</div><details class="panel checks-wrap" id="all-checks"><summary>全部检查明细 · '+checks.length+' 项（含通过、扣分、待验证与不适用）</summary><div class="table-scroll"><table class="checks-table"><thead><tr><th>检查编号</th><th>量表项</th><th>状态</th><th>判断依据 / 不适用理由</th><th>证据与关联问题</th></tr></thead><tbody>'+checksRows()+'</tbody></table></div></details></section>'+
+'<section class="section" id="evidence" aria-labelledby="evidence-title"><div class="section-head"><div><div class="section-title"><span class="section-number">05</span><h2 id="evidence-title">证据索引</h2></div><div class="section-desc">分别记录检查方式、预期、实际观察与适用边界。</div></div><div class="section-note">'+evidence.length+' 条证据</div></div>'+evidenceHtml()+'</section>'+
+`<section class="section" id="method"><div class="section-head"><div class="section-title"><span class="section-number">06</span><h2>评分口径与可追溯性</h2></div></div><div class="panel inner-panel"><div class="method-grid"><div><h3 class="subhead">固定维度，问题扣分</h3><p>指标只定义检查要求；通过检查不加分。默认轻微/中等/严重/致命分别在主维度扣3/10/20/40分。同一根因合并，多次命中只扣一次；独立根因即使命中同一指标也分别扣分。</p><div class="formula">维度分 = max(0, 100 − 确认问题扣分之和)<br>综合分 = Σ(维度分 × 有效权重)</div><div class="grade-scale"><div><strong>80–100</strong>良好</div><div><strong>60–&lt;80</strong>合格</div><div><strong>&lt;60</strong>不合格</div></div><p>确认阻断按策略封顶；封顶不是重复扣分。分数不是发布许可。</p></div><div><h3 class="subhead">未知、适用性与版本</h3><p>未检查不默认100分；部分检查只显示暂评上限，不生成正式等级。未知不扣分，也不能因难以验证就改为不适用。管理责任、签字、交接、文档数量和架构偏好均不计分。</p><p>每份报告内嵌量表与扣分策略快照。变更指标须更新量表版本；历史报告不自动重算。</p><p class="tiny-note">量表 SHA-256：<code style="overflow-wrap:anywhere">${esc(summary.rubric_sha256)}</code></p><p class="tiny-note">策略 SHA-256：<code style="overflow-wrap:anywhere">${esc(summary.policy_sha256)}</code></p></div></div></div></section>`+
+'<footer class="report-footer"><span>'+esc(meta.project||'项目待指定')+' · '+esc(meta.version||'版本待定')+' · '+esc(meta.reviewed_at||'日期待填写')+'</span><span>固定报告模板 '+esc(meta.template_version||'2.1.0')+' · '+(meta.is_demo?'示例内容，不代表真实项目结论':'结论限于本次代码快照、适用条件与检查范围')+'</span></footer>';
+document.title=(meta.is_demo?'【示例】':'')+(meta.project?meta.project+' · ':'')+(meta.title||'软件工程质量审查报告');
+document.getElementById('top-version').textContent='报告 '+(meta.version||'—')+' · 模板 '+(meta.template_version||'2.1.0');
+const controls={search:document.getElementById('filter-search'),dimension:document.getElementById('filter-dimension'),severity:document.getElementById('filter-severity'),status:document.getElementById('filter-status'),blocker:document.getElementById('filter-blocker')};
+const cards=[...document.querySelectorAll('.issue-card')];
+const searchable=findings.map(f=>JSON.stringify(f).toLocaleLowerCase());
+function applyFilters(){const query=controls.search.value.trim().toLocaleLowerCase();let visible=0;cards.forEach((card,i)=>{const f=findings[i];const show=(!query||searchable[i].includes(query))&&(!controls.dimension.value||String(f.dimension_id)===controls.dimension.value)&&(!controls.severity.value||f.severity===controls.severity.value)&&(!controls.status.value||f.status===controls.status.value)&&(!controls.blocker.value||(controls.blocker.value==='yes'?Boolean(f.blocker)&&f.status==='confirmed':!(Boolean(f.blocker)&&f.status==='confirmed')));card.hidden=!show;if(show)visible++;});document.getElementById('filter-count').textContent='显示 '+visible+' / '+findings.length+' 项问题';document.getElementById('no-findings').hidden=visible>0;}
+for(const control of Object.values(controls))control.addEventListener(control===controls.search?'input':'change',applyFilters);
+document.getElementById('reset-filters').addEventListener('click',()=>{Object.values(controls).forEach(control=>control.value='');applyFilters();});
+document.getElementById('expand-all').addEventListener('click',()=>cards.filter(card=>!card.hidden).forEach(card=>card.open=true));
+document.getElementById('collapse-all').addEventListener('click',()=>cards.filter(card=>!card.hidden).forEach(card=>card.open=false));
+document.querySelectorAll('[data-dimension]').forEach(button=>button.addEventListener('click',()=>{Object.values(controls).forEach(control=>control.value='');controls.dimension.value=button.dataset.dimension;applyFilters();document.getElementById('findings').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}));
+function revealAnchor(){let id;try{id=decodeURIComponent(window.location.hash.slice(1));}catch{return;}if(!id)return;const target=document.getElementById(id);if(!target)return;if(target.matches('.issue-card')){if(target.hidden){Object.values(controls).forEach(control=>control.value='');applyFilters();}target.open=true;}const details=target.closest('details');if(details)details.open=true;}
+window.addEventListener('hashchange',revealAnchor);
+let printState=null;
+function beforePrint(){if(printState)return;printState={details:[...document.querySelectorAll('details')].map(el=>[el,el.open]),hidden:cards.map(el=>[el,el.hidden]),empty:document.getElementById('no-findings').hidden};printState.details.forEach(([el])=>el.open=true);cards.forEach(el=>el.hidden=false);document.getElementById('no-findings').hidden=findings.length>0;}
+function afterPrint(){if(!printState)return;const saved=printState;printState=null;saved.details.forEach(([el,open])=>el.open=open);saved.hidden.forEach(([el,hidden])=>el.hidden=hidden);document.getElementById('no-findings').hidden=saved.empty;}
+window.addEventListener('beforeprint',beforePrint);window.addEventListener('afterprint',afterPrint);
+document.getElementById('print-button').addEventListener('click',()=>{beforePrint();try{window.print();}catch(error){afterPrint();throw error;}});
+applyFilters();revealAnchor();
+})();
+</script>
+</body>
+</html>

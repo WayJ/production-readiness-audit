@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security disclosure / 安全披露
+    url: https://github.com/WayJ/production-readiness-audit/blob/main/SECURITY.md
+    about: Read the private reporting policy before sharing vulnerability details.

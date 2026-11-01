@@ -1,0 +1,27 @@
+# Private audit inputs and outputs: never publish customer reports.
+reports/
+review-data/
+private/
+secrets/
+evidence-local/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+# Build and local tooling
+dist/
+build/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.claude/

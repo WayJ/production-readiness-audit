@@ -1,0 +1,20 @@
+name: Improvement / 改进建议
+description: Suggest a scoring, evidence, usability or portability improvement.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and scenario / 问题与场景
+      description: Describe a technical need without customer identifiers.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change / 建议
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: How to verify it / 如何验证

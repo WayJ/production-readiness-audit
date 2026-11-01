@@ -1,0 +1,42 @@
+name: Bug report / 问题反馈
+description: Report a reproducible tool or report-rendering bug with synthetic data.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include secrets, customer code or actual audit reports.
+        Security vulnerabilities must use SECURITY.md's private reporting route.
+        请仅提供虚构最小数据；安全漏洞不要公开提交。
+  - type: input
+    id: version
+    attributes:
+      label: Version / 版本
+      placeholder: '0.1.0 or commit SHA'
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: OS, Python and browser / 环境
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction / 复现步骤
+      description: Exact command and minimal synthetic input. No private data.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual / 预期与实际
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Data safety / 数据安全
+      options:
+        - label: I removed secrets and real customer data / 已移除秘密与真实客户数据
+          required: true

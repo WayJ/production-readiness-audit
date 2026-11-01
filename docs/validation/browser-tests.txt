@@ -1,0 +1,2 @@
+Browser smoke passed: scoring display, filters, print events, anchors, responsive views, command tabs, partial state, inert payload.
+Not tested here: URL navigation/downloads, real print dialog, hosted Pages or host-agent integration.

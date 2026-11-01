@@ -1,0 +1,344 @@
+{
+  "schema_version": "2.0",
+  "rubric_version": "3.0",
+  "policy_version": "1.0",
+  "baseline_ready": false,
+  "meta": {
+    "title": "软件工程质量与上线审查报告",
+    "project": "待审查项目",
+    "version": "draft-1",
+    "reviewed_at": "待审查（初始化模板）",
+    "snapshot": "待确认",
+    "environment": "待确认",
+    "is_demo": false,
+    "template_version": "3.0"
+  },
+  "conclusion": "尚未执行审查。基线、检查结论和证据均待建立，不构成上线判断。",
+  "baseline": {
+    "scope": [
+      "既有功能范围待确认，不默认增加功能。"
+    ],
+    "conditions": [
+      {
+        "id": "C-001",
+        "label": "使用条件",
+        "value": "待确认",
+        "status": "待确认",
+        "source": "尚未提供"
+      }
+    ],
+    "key_flows": [
+      {
+        "id": "F-001",
+        "name": "核心业务链待梳理",
+        "expected": "待确认",
+        "status": "未验证",
+        "evidence_ids": []
+      }
+    ],
+    "limitations": [
+      "初始化草稿：没有执行代码审查或运行测试，不包含已确认缺陷。"
+    ]
+  },
+  "checks": [
+    {
+      "id": "A1",
+      "criterion": "A1",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "A2",
+      "criterion": "A2",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "A3",
+      "criterion": "A3",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "B1",
+      "criterion": "B1",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "B2",
+      "criterion": "B2",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "B3",
+      "criterion": "B3",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "B4",
+      "criterion": "B4",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "C1",
+      "criterion": "C1",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "C2",
+      "criterion": "C2",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "C3",
+      "criterion": "C3",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "D1",
+      "criterion": "D1",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "D2",
+      "criterion": "D2",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "D3",
+      "criterion": "D3",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "E1",
+      "criterion": "E1",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "E2",
+      "criterion": "E2",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "E3",
+      "criterion": "E3",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "E4",
+      "criterion": "E4",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "F1",
+      "criterion": "F1",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "F2",
+      "criterion": "F2",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "F3",
+      "criterion": "F3",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "G1",
+      "criterion": "G1",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "G2",
+      "criterion": "G2",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "H1",
+      "criterion": "H1",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "H2",
+      "criterion": "H2",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "H3",
+      "criterion": "H3",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "I1",
+      "criterion": "I1",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    },
+    {
+      "id": "I2",
+      "criterion": "I2",
+      "status": "unknown",
+      "reason": "尚未检查，需取得适用证据。",
+      "scope_refs": [
+        "C-001"
+      ],
+      "evidence_ids": [],
+      "finding_ids": []
+    }
+  ],
+  "findings": [],
+  "evidence": []
+}

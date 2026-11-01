@@ -1,0 +1,541 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Production Readiness Audit v2.0 — generated, do not hand edit",
+  "description": "Editor structure only; runtime also checks rule coverage, evidence, root causes and blockers.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "2.0"
+    },
+    "rubric_version": {
+      "const": "3.0"
+    },
+    "policy_version": {
+      "const": "1.0"
+    },
+    "baseline_ready": {
+      "type": "boolean"
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "project": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewed_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "snapshot": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "is_demo": {
+          "type": "boolean"
+        },
+        "template_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "title",
+        "project",
+        "version",
+        "reviewed_at",
+        "snapshot",
+        "environment",
+        "is_demo"
+      ],
+      "additionalProperties": true
+    },
+    "conclusion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 0
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "id",
+              "label",
+              "value",
+              "status",
+              "source"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true,
+          "minItems": 0
+        },
+        "key_flows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "expected": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 0
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "expected",
+              "status",
+              "evidence_ids"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true,
+          "minItems": 0
+        }
+      },
+      "required": [
+        "scope",
+        "limitations",
+        "conditions",
+        "key_flows"
+      ],
+      "additionalProperties": false
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"
+          },
+          "criterion": {
+            "enum": [
+              "A1",
+              "A2",
+              "A3",
+              "B1",
+              "B2",
+              "B3",
+              "B4",
+              "C1",
+              "C2",
+              "C3",
+              "D1",
+              "D2",
+              "D3",
+              "E1",
+              "E2",
+              "E3",
+              "E4",
+              "F1",
+              "F2",
+              "F3",
+              "G1",
+              "G2",
+              "H1",
+              "H2",
+              "H3",
+              "I1",
+              "I2"
+            ]
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "fail",
+              "unknown",
+              "na"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 0
+          },
+          "finding_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 0
+          },
+          "critical": {
+            "type": "boolean"
+          },
+          "requirement": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "criterion",
+          "status",
+          "reason",
+          "scope_refs",
+          "evidence_ids",
+          "finding_ids"
+        ],
+        "additionalProperties": false
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "vulnerability",
+              "bug",
+              "architecture",
+              "organization",
+              "verification"
+            ]
+          },
+          "dimension_id": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G",
+              "H",
+              "I"
+            ]
+          },
+          "status": {
+            "enum": [
+              "confirmed",
+              "unknown"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "severity_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "blocker": {
+            "type": "boolean"
+          },
+          "blocker_rule_id": {
+            "enum": [
+              null,
+              "SEC-EXPLOIT",
+              "CORE-FAILURE",
+              "DATA-CORRUPTION",
+              "CANNOT-DEPLOY",
+              "NO-RECOVERY"
+            ]
+          },
+          "blocker_reason": {
+            "type": "string"
+          },
+          "cause": {
+            "type": "string",
+            "minLength": 1
+          },
+          "trigger": {
+            "type": "string",
+            "minLength": 1
+          },
+          "impact": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 0
+          },
+          "suggestion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "acceptance": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reproduction": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 0
+          },
+          "priority": {
+            "type": "string",
+            "minLength": 1
+          },
+          "root_cause_key": {
+            "type": "string",
+            "minLength": 1
+          },
+          "criterion_ids": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "B4",
+                "C1",
+                "C2",
+                "C3",
+                "D1",
+                "D2",
+                "D3",
+                "E1",
+                "E2",
+                "E3",
+                "E4",
+                "F1",
+                "F2",
+                "F3",
+                "G1",
+                "G2",
+                "H1",
+                "H2",
+                "H3",
+                "I1",
+                "I2"
+              ]
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "type",
+          "dimension_id",
+          "status",
+          "severity",
+          "severity_reason",
+          "blocker",
+          "cause",
+          "trigger",
+          "impact",
+          "scope",
+          "locations",
+          "evidence_ids",
+          "suggestion",
+          "acceptance",
+          "root_cause_key",
+          "criterion_ids"
+        ],
+        "additionalProperties": false
+      },
+      "uniqueItems": true,
+      "minItems": 0
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"
+          },
+          "method": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expected": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observed": {
+            "type": "string",
+            "minLength": 1
+          },
+          "limitations": {
+            "type": "string",
+            "minLength": 1
+          },
+          "is_demo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "method",
+          "location",
+          "expected",
+          "observed",
+          "limitations",
+          "is_demo"
+        ],
+        "additionalProperties": false
+      },
+      "uniqueItems": true,
+      "minItems": 0
+    },
+    "summary": {
+      "type": "object",
+      "description": "Derived; discarded and recalculated by the runtime."
+    }
+  },
+  "required": [
+    "schema_version",
+    "rubric_version",
+    "policy_version",
+    "baseline_ready",
+    "meta",
+    "conclusion",
+    "baseline",
+    "checks",
+    "findings",
+    "evidence"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,70 @@
+{
+  "policy_version": "1.0",
+  "mode": "dimension_deductions",
+  "dimension_base": 100,
+  "severity_deductions": {
+    "low": 3,
+    "medium": 10,
+    "high": 20,
+    "critical": 40
+  },
+  "severity_guidance": {
+    "low": "局部、有限的实际影响；不是纯风格偏好。",
+    "medium": "明确影响部分行为、维护成本或运行可靠性。",
+    "high": "影响重要流程、重要数据或较大范围。",
+    "critical": "严重安全、数据或核心业务后果。"
+  },
+  "grades": {
+    "good": 80,
+    "pass": 60
+  },
+  "blocker_cap": 59,
+  "dimension_na_policy": "exclude_and_normalize",
+  "blocker_rules": [
+    {
+      "id": "SEC-EXPLOIT",
+      "title": "已确认可利用的严重安全漏洞",
+      "dimensions": [
+        "B"
+      ],
+      "condition": "可越权访问重要数据、执行未授权危险操作或产生同等级安全后果；须给出证据和触发前提。"
+    },
+    {
+      "id": "CORE-FAILURE",
+      "title": "核心业务无法正确完成",
+      "dimensions": [
+        "A",
+        "C",
+        "E",
+        "F"
+      ],
+      "condition": "在约定使用条件下核心业务无法完成或重要结果错误，且存在明确技术证据。"
+    },
+    {
+      "id": "DATA-CORRUPTION",
+      "title": "重要数据损坏、丢失或关键不变量被破坏",
+      "dimensions": [
+        "E",
+        "F",
+        "I"
+      ],
+      "condition": "已确认重要数据丢失、损坏、超分配或等效严重一致性后果。"
+    },
+    {
+      "id": "CANNOT-DEPLOY",
+      "title": "约定环境无法部署启动",
+      "dimensions": [
+        "H"
+      ],
+      "condition": "指定交付版本在约定目标条件下无法构建或启动。"
+    },
+    {
+      "id": "NO-RECOVERY",
+      "title": "重要数据无法按约定条件恢复",
+      "dimensions": [
+        "I"
+      ],
+      "condition": "已确认重要数据不能按明确的恢复条件恢复或可靠重建。"
+    }
+  ]
+}
