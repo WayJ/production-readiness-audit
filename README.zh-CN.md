@@ -8,6 +8,40 @@
 
 **v0.2.0 已改为：维度固定权重，维度内部满分扣分。指标不分配分数，新增指标不用重新凑权重。**
 
+## 安装
+
+把完整 Skill 复制到宿主 Agent 支持的技能目录：
+
+```sh
+python scripts/install_skill.py --target ~/.claude/skills
+```
+
+Windows PowerShell / CMD：
+
+```powershell
+py -3 scripts/install_skill.py --target "C:\Users\You\.claude\skills"
+```
+
+安装器只复制白名单内的 Skill 文件，不改宿主设置，也不会覆盖已有目录（会直接报错，需要先改名或删除旧目录）。不同宿主的技能目录不同，请按你的宿主文档替换 `--target`；能否被自动发现需在宿主中验证。
+
+## 调用
+
+装好后，在**要审查的项目目录**新开一个 Agent 会话，用自然语言下达任务。下面三条可以直接复制：
+
+```text
+用 production-readiness-audit 审查这个项目的上线就绪情况
+```
+
+```text
+用 production-readiness-audit 审查这个项目，只看安全和并发两个维度
+```
+
+```text
+用 production-readiness-audit 审查这个项目，报告输出到 .audit/review.html
+```
+
+Agent 会按 [SKILL.md](skills/production-readiness-audit/SKILL.md) 实际检查代码、记录证据，再调用本仓库的 CLI 校验、计分并生成 HTML 报告。审查由 Agent 完成，CLI 不自动扫描项目。
+
 ![虚构示例审查报告](docs/images/report-preview.png)
 
 ## 能做什么
@@ -42,15 +76,7 @@ python scripts/review.py validate --input review-data/audit.json
 python scripts/review.py render --input review-data/audit.json --output reports/review.html --json-output reports/review.scored.json
 ```
 
-初始化数据全部是 `unknown`，不会默认通过。先让具备项目访问能力的 Agent 按 [SKILL.md](skills/production-readiness-audit/SKILL.md) 检查，再填写真实基线、证据与问题。不从全通过样例改名制造真实结论。
-
-安装完整 Skill 到宿主支持的目录：
-
-```sh
-python scripts/install_skill.py --target /你的/skills/目录
-```
-
-Windows 示例：`py -3 scripts/install_skill.py --target "C:\Users\You\agent-skills"`。安装器不改宿主设置、不覆盖旧目录；具体宿主能否自动发现需在宿主中验证。
+初始化数据全部是 `unknown`，不会默认通过。先让具备项目访问能力的 Agent 按 [SKILL.md](skills/production-readiness-audit/SKILL.md) 检查，再填写真实基线、证据与问题。不从全通过样例改名制造真实结论。日常使用推荐直接用上面的「调用」方式让 Agent 走完整流程；这套命令用于手动逐步执行或排查问题。
 
 ## 评分规则
 

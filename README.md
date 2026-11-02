@@ -8,6 +8,40 @@ An evidence-based agent skill and offline HTML reporting toolkit for reviewing e
 
 **v0.2.0 — fixed dimension weights; deductions within each dimension.** Criteria have no point allocations. Add a criterion without redistributing the other criteria's weights.
 
+## Install
+
+Copy the complete skill into the skills directory your agent host loads from:
+
+```sh
+python scripts/install_skill.py --target ~/.claude/skills
+```
+
+Windows PowerShell / Command Prompt:
+
+```powershell
+py -3 scripts/install_skill.py --target "C:\Users\You\.claude\skills"
+```
+
+The installer copies only allowlisted skill files. It does not change host settings and refuses to overwrite an existing directory (it errors instead — rename or remove the old one first). Skill directories differ between hosts, so replace `--target` with your host's path; whether the host discovers it automatically must be verified in that host.
+
+## Invoke
+
+After installing, open a **new agent session in the project you want reviewed** and ask for the review in plain language. Copy any of these three:
+
+```text
+Use production-readiness-audit to review this project for production readiness
+```
+
+```text
+Use production-readiness-audit to review this project, security and concurrency dimensions only
+```
+
+```text
+Use production-readiness-audit to review this project and write the report to .audit/review.html
+```
+
+The agent follows [SKILL.md](skills/production-readiness-audit/SKILL.md) to inspect the code and record evidence, then calls this repository's CLI to validate, score and render the HTML report. The agent performs the review; the CLI does not scan projects by itself.
+
 ![Fictional engineering review report](docs/images/report-preview.png)
 
 ## What this does—and does not do
@@ -42,13 +76,7 @@ python scripts/review.py render --input review-data/audit.json --output reports/
 
 The initial file is **entirely unreviewed**. Supply the actual baseline, checks, evidence and findings before producing a meaningful review. Read [SKILL.md](skills/production-readiness-audit/SKILL.md) for the authorized review procedure. Failed checks need confirmed findings and shared evidence. Passing checks also require evidence. Unknowns are not defects; an unchecked dimension is not awarded 100.
 
-To copy the complete skill into a directory supported by your agent host:
-
-```sh
-python scripts/install_skill.py --target /path/to/your/skills
-```
-
-Windows example: `py -3 scripts/install_skill.py --target "C:\Users\You\agent-skills"`. The installer does not modify host settings and refuses to overwrite an existing installation. Host-specific skill discovery must be verified in that host.
+For day-to-day use, prefer the **Invoke** section above and let the agent run the whole flow; these commands are for manual, step-by-step execution and troubleshooting.
 
 ## Scoring
 
