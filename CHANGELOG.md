@@ -4,6 +4,7 @@
 
 - Show rubric indicator names in report titles: pending-verification cards and the check table now read "A1 · 核心业务链真实完成" instead of repeating the bare id "A1 · A1".
 - Lead both READMEs and both landing pages with installation and invocation: the skill install command and copyable agent prompts now appear before everything else.
+- Install with the host's own tooling: document `npx skills add` per agent host (Claude Code, Codex, Cursor and 80+ more) instead of a Python-only install step, and keep project-scoped installation as the default.
 
 ## 0.2.0 — 2026-11-01
 

@@ -10,23 +10,32 @@
 
 ## 安装
 
-把完整 Skill 复制到宿主 Agent 支持的技能目录：
+用 [skills CLI](https://github.com/vercel-labs/skills) 把 Skill 装进你的 Agent 宿主（支持 Claude Code、Codex、Cursor、OpenCode 等 80+ 种宿主）。在**要审查的项目目录**下执行：
 
 ```sh
-python scripts/install_skill.py --target ~/.claude/skills
+# Claude Code
+npx skills add WayJ/production-readiness-audit --skill production-readiness-audit -a claude-code
 ```
 
-Windows PowerShell / CMD：
+其他宿主把 `-a claude-code` 换成对应名称，例如 `-a codex`、`-a cursor`；加 `-a '*'` 可装到所有检测到的宿主：
+
+```sh
+npx skills add WayJ/production-readiness-audit --skill production-readiness-audit -a '*'
+```
+
+装好后 Skill 位于项目的 `.claude/skills/production-readiness-audit/`（或对应宿主的技能目录），作用域仅限该项目；需要跨项目使用时再加 `-g`。Node.js 22.20 以上。
+
+Windows PowerShell / CMD 使用相同命令：
 
 ```powershell
-py -3 scripts/install_skill.py --target "C:\Users\You\.claude\skills"
+npx skills add WayJ/production-readiness-audit --skill production-readiness-audit -a claude-code
 ```
 
-安装器只复制白名单内的 Skill 文件，不改宿主设置，也不会覆盖已有目录（会直接报错，需要先改名或删除旧目录）。不同宿主的技能目录不同，请按你的宿主文档替换 `--target`；能否被自动发现需在宿主中验证。
+不用 CLI 时，也可以手动把 `skills/production-readiness-audit/` 整个目录复制到宿主支持的技能目录；`python scripts/install_skill.py --target <目录>` 提供同样的复制能力，不改宿主设置、不覆盖已有目录。
 
 ## 调用
 
-装好后，在**要审查的项目目录**新开一个 Agent 会话，用自然语言下达任务。下面三条可以直接复制：
+装好后，在**同一项目目录**新开一个 Agent 会话，用自然语言下达任务。下面三条可以直接复制：
 
 ```text
 用 production-readiness-audit 审查这个项目的上线就绪情况

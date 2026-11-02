@@ -10,23 +10,32 @@ An evidence-based agent skill and offline HTML reporting toolkit for reviewing e
 
 ## Install
 
-Copy the complete skill into the skills directory your agent host loads from:
+Use the [skills CLI](https://github.com/vercel-labs/skills) to install the skill into your agent host (Claude Code, Codex, Cursor, OpenCode and 80+ more). Run it **in the project you want to review**:
 
 ```sh
-python scripts/install_skill.py --target ~/.claude/skills
+# Claude Code
+npx skills add WayJ/production-readiness-audit --skill production-readiness-audit -a claude-code
 ```
 
-Windows PowerShell / Command Prompt:
+For other hosts, replace `-a claude-code` with their name — `-a codex`, `-a cursor` — or use `-a '*'` for every detected host:
+
+```sh
+npx skills add WayJ/production-readiness-audit --skill production-readiness-audit -a '*'
+```
+
+The skill lands in the project's `.claude/skills/production-readiness-audit/` (or your host's equivalent) and applies to that project only; add `-g` to make it available across projects. Requires Node.js 22.20 or later.
+
+Windows PowerShell / Command Prompt use the same command:
 
 ```powershell
-py -3 scripts/install_skill.py --target "C:\Users\You\.claude\skills"
+npx skills add WayJ/production-readiness-audit --skill production-readiness-audit -a claude-code
 ```
 
-The installer copies only allowlisted skill files. It does not change host settings and refuses to overwrite an existing directory (it errors instead — rename or remove the old one first). Skill directories differ between hosts, so replace `--target` with your host's path; whether the host discovers it automatically must be verified in that host.
+Without the CLI, copy the whole `skills/production-readiness-audit/` directory into the skill directory your host supports. `python scripts/install_skill.py --target <directory>` does the same copy: it changes no host settings and refuses to overwrite an existing directory.
 
 ## Invoke
 
-After installing, open a **new agent session in the project you want reviewed** and ask for the review in plain language. Copy any of these three:
+After installing, open a **new agent session in the same project** and ask for the review in plain language. Copy any of these three:
 
 ```text
 Use production-readiness-audit to review this project for production readiness
